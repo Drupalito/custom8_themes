@@ -1,0 +1,24 @@
+{#
+/**
+ * @file
+ * Default theme implementation to display a block.
+ *
+ * @see bootstrap_preprocess_block()
+ * @see template_preprocess()
+ * @see template_preprocess_block()
+ * @see bootstrap_process_block()
+ * @see template_process()
+ *
+ * @ingroup templates
+ */
+#}
+{%
+  set classes = [
+    'main__header',
+  ]
+%}
+<div{{ attributes.removeAttribute('id').addClass(classes) }}>
+  {% block content %}
+    {{ content }}
+  {% endblock %}
+</div>

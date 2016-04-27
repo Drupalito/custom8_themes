@@ -1,0 +1,153 @@
+
+/*doc
+---
+title: Modal
+category: Components - Modal
+---
+
+```html_example
+
+  <button class="btn btn--primary" data-toggle="modal" data-target="#myModal">Open modal</button>
+
+  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content modal-content">
+        <div class="modal-header">
+          <button type="button" class="modal__close close" data-dismiss="modal" aria-hidden="true" title="Close modal">&times;</button>
+          <h1 class="modal-title mvn" id="myModalLabel">Modal title</h1>
+        </div>
+        <div class="modal-body">
+          ...
+        </div>
+        <div class="modal-footer text-right clearfix">
+          <button type="button" class="btn btn--default" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn--primary">Save changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+```
+
+*/
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1040;
+  display: none;
+  overflow: hidden;
+  -webkit-overflow-scrolling: touch;
+  outline: 0;
+
+  &-title {
+    line-height: 1.42857143;
+  }
+
+  &-body,
+  &-content,
+  &-dialog {
+    position: relative;
+  }
+
+  &-content {
+    box-shadow: 0 3px 9px rgba(0, 0, 0, .5);
+    background-clip: padding-box;
+    border: 1px solid;
+    background: #fff;
+    border-radius: 4px;
+    outline: 0;
+  }
+
+  &-header {
+    border-bottom: 1px solid;
+
+    .close {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+    }
+  }
+
+  &-footer {
+    border-top: 1px solid;
+  }
+
+  &-header,
+  &-footer,
+  &-body {
+    padding: 1.5em;
+    border-color: #ccc;
+  }
+
+  &-open {
+    overflow: hidden;
+
+    .modal {
+      overflow-x: hidden;
+      overflow-y: auto;
+    }
+  }
+
+  &-dialog {
+    @extend .mam;
+    width: auto;
+
+    .modal.fade & {
+      transition: transform .3s ease-out;
+      transform: translate(0, -25%);
+    }
+
+    .modal.in & {
+      transform: translate(0, 0);
+    }
+  }
+
+  &-backdrop {
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    background: #000;
+
+    &.fade {
+      opacity: 0;
+    }
+
+    &.in {
+      opacity: .5;
+    }
+  }
+
+  &-scrollbar-measure {
+    position: absolute;
+    top: -9999px;
+    width: 50px;
+    height: 50px;
+    overflow: scroll;
+  }
+}
+
+@include mq("small") {
+  .modal-dialog {
+    width: 600px;
+    margin: 30px auto;
+  }
+
+  .modal-content {
+    box-shadow: 0 5px 15px rgba(0, 0, 0, .5);
+  }
+
+  .modal--sm {
+    width: 300px;
+  }
+}
+
+@include mq("large") {
+  .modal--lg {
+    width: 900px;
+  }
+}

@@ -1,0 +1,80 @@
+{#
+/**
+ * @file
+ * Default theme implementation to display a single Drupal page while offline.
+ *
+ * All available variables are mirrored in page.html.twig.
+ * Some may be blank but they are provided for consistency.
+ *
+ * @see template_preprocess_maintenance_page()
+ *
+ * @ingroup themeable
+ */
+#}
+
+<div id="page" class="page">
+
+  <div class="page-banner banner">
+    <header id="banner" role="banner" class="banner__region container">
+      <div class="row row-sm-height">
+        <div class="col-xs-12 col-sm-8">
+
+          <p class="mvn">
+            <a class="logo__link" href="{{ front_page }}" title="{{ site_name }} ({{ 'Home'|t }})" rel="home">
+              {% if logo %}
+                <img class="logo__image" src="{{ logo }}" alt="{{ site_name }} ({{ 'Home'|t }})" />
+              {% endif %}
+              {% if (site_name or site_slogan) %}
+              <span class="logo__content">
+                {% if site_name %}
+                  <span class="logo__name">{{ site_name }}</span>
+                {% endif %}
+                {% if site_slogan %}
+                  <span class="logo__slogan">{{ site_slogan }}</span>
+                {% endif %}
+              </span>
+              {% endif %}
+            </a>
+          </p>
+
+        </div>
+        <div class="col-xs-12 col-sm-4">
+          {% if page.branding %}
+            {{ page.branding }}
+          {% endif %}
+        </div>
+      </div>
+    </header>
+  </div>
+
+  <div class="page-container">
+    <div id="container" class="container__region container">
+      <div class="row">
+        <div id="content" class="col-xs-12">
+          <main id="main" class="main text-center" role="main">
+
+            {% if title %}
+              <div class="main__header">
+                <h1 class="main__title">{{ title }}</h1>
+              </div>
+            {% endif %}
+
+            {{ page.highlighted }}
+            {{ page.content }}
+          </main>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  {% if page.footer %}
+    <div class="page-contentinfo contentinfo">
+      <footer id="contentinfo" role="contentinfo" class="contentinfo__region container">
+        <div class="row">
+          {{ page.footer }}
+        </div>
+      </footer>
+    </div>
+  {% endif %}
+
+</div>

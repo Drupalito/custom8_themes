@@ -1,0 +1,260 @@
+
+// Base colorz
+@each $name, $color in $colorz {
+  .#{$name}-color { color: $color; }
+  .#{$name}-border { border-color: $color; }
+  .#{$name}-background {
+    background-color: $color;
+    color: #fff;
+  }
+}
+
+/*doc
+---
+title: Typography
+category: Base - Typo
+---
+
+Divers styles de typographie
+
+|Key | Example | Code
+|----|---------|-----|
+|CAPS TEXT | <span class="caps">Text</span> | ``` <span class="caps">Text</span> ```
+|small-caps | <span class="small-caps">Text</span> | ``` <span class="small-caps">Text</span> ```
+|no-caps | <span class="no-caps">Text</span> | ``` <span class="no-caps">Text</span> ```
+|lowercase | <span class="lower-caps">Long Text</span> lowercase Text | ``` <span class="lower-caps">Text</span> ```
+|Capitalize | <span class="capitalize">Long Text</span> Capitalize Text | ``` <span class="capitalize">Text</span> ```
+|bold | <span class="bold">Long strong Text</span> | ``` <span class="bold">Text</span> or <strong>Text</strong> ```
+|italic | <span class="italic">Long italic Text</span> | ``` <span class="italic">Text</span> or <em>Text</em> ```
+|regular | <span class="regular">Long Text</span> | ``` <span class="regular">Text</span> ```
+|underline | <span class="underline">Long Text</span> | ``` <span class="underline">Text</span> or <s>Text</s> ```
+|No underline | <span class="nounderline">Long Text</span> | ``` <span class="nounderline">Text</span> ```
+|Strike | <span class="strike">Long Text</span> | ``` <span class="strike">Text</span> or <del>Text</del> ```
+
+*/
+
+.caps { text-transform: uppercase; }
+.small-caps { font-variant: small-caps; }
+.lower-caps { text-transform: lowercase; }
+.capitalize { text-transform: capitalize; }
+.no-caps { font-variant: normal; }
+.regular { font-weight: normal; font-style: normal; }
+.bold { @include bold; }
+.italic { @include italic; }
+.underline { text-decoration: underline; }
+.nounderline { text-decoration: none; border-bottom: 0; }
+.ellipsis { text-overflow: ellipsis; }
+.strike { text-decoration: line-through; }
+
+/*doc
+---
+title: Text alignment
+category: Base - Typo
+---
+
+La justification n'est pas disponible car interdite en accessibilité pour des questions de lisibilité. Ou alors, la justication doit être contrôlable par l'utilisateur.
+
+```html_example
+
+  <p class="text-left mvn">Aligné à gauche (défaut)</p>
+  <p class="text-right mvn">Aligné à droite</p>
+  <p class="text-center mvn">Centré</p>
+
+```
+
+*/
+
+.text-left { text-align: left; }
+.text-right { text-align: right; }
+.text-center { text-align: center; }
+
+/*doc
+---
+title: Blocs flottant
+category: Base - Typo
+---
+
+* `.pull-left` - Floattant à gauche
+* `.pull-right` - Floattant à droite
+* `.pull-none` - Annuler le float
+
+```html_example
+
+  <div class="clearfix">
+    <p class="pull-left mvn">Text</p>
+    <p class="pull-right mvn">Text</p>
+  </div>
+
+```
+
+*/
+
+.pull-left { float: left; }
+.pull-right { float: right; }
+.pull-none { float: none; }
+
+/*doc
+---
+title: Blocs incrustations
+category: Base - Typo
+---
+
+Utiliser souvent par le WYSIWYG pour aligner les images à gauche, centrer, ou à droite. Les espacements seront effectués.
+
+* `.alignleft` - Alignement à gauche
+* `.alignright` - Alignement à droite
+* `.aligncenter` - Alignement centré
+* `.alignnone` - Pas d'alignement
+
+<p><img class="alignleft mtn" src="http://lorempixel.com/250/250/animals/1" width="250" height="250" alt="" /> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Modi et voluptas expedita sunt sed dicta delectus esse commodi. Cupiditate, sunt, ullam, quasi, ipsam quisquam autem animi repudiandae sequi libero eos tempore commodi voluptates tempora est quam quas dignissimos officia consequuntur natus molestias? Recusandae, nostrum est consequuntur ad quam ducimus assumenda!</p>
+<p><img class="alignright" src="http://lorempixel.com/150/150/animals/2" width="150" height="150" alt="" /> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Temporibus, eligendi nihil at animi itaque tempore voluptas aperiam sit consequatur nisi magni iusto. Deleniti, molestiae, magnam, eligendi officiis voluptatibus voluptatum provident atque recusandae voluptate dolorem voluptatem inventore illo beatae rem doloribus debitis commodi quasi molestias in a eos maiores dolore nostrum quaerat perspiciatis. Sit, mollitia, neque, quasi libero provident rerum earum fugiat nihil sed odit dolorum eveniet quas dolores impedit voluptatibus incidunt debitis aliquam accusantium ab eligendi.</p>
+<p><img class="aligncenter" src="http://lorempixel.com/150/150/animals/3" width="150" height="150" alt="" /> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolorum, earum, molestias perferendis autem minima nihil itaque fugit quis. Eius, natus vitae similique impedit quod dolor tenetur nemo atque praesentium dolore commodi cum possimus quo quas eos magnam sapiente fugit accusamus magni quasi iure placeat quam dignissimos quidem vero aut autem officia dicta hic labore! Quibusdam delectus similique sit atque eum.</p>
+<p><img class="alignnone" src="http://lorempixel.com/150/150/animals/4" width="150" height="150" alt="" /> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Unde, ratione, quo, aliquid, quasi minus quia a accusantium ad obcaecati vitae adipisci eos facere dicta. Ex, in consequuntur tenetur eius laborum quisquam porro sequi. Molestias, ex libero cum eligendi magni laboriosam.</p>
+
+*/
+.alignleft {
+  @extend .pull-left;
+  margin-right: $grid-gutter-width;
+  margin-left: 0;
+}
+
+.alignright {
+  @extend .pull-right;
+  margin-right: 0;
+  margin-left: $grid-gutter-width;
+}
+
+.alignnone {
+  @extend .clearfix;
+  margin-left: 0;
+  margin-right: 0;
+  display: block;
+}
+
+.aligncenter {
+  @extend .alignnone;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/*doc
+---
+title: List reset
+category: Base - Typo
+---
+
+* Fonctionne avec `ul` et `ol`
+* Supprime la puce et le `padding-left`
+
+```html_example
+
+  <ul class="list-none">
+    <li>Item One</li>
+    <li>Item Two</li>
+    <li>Item Three</li>
+  </ul>
+
+```
+
+*/
+.list-none,
+.item-list ul {
+  @include list-none;
+}
+
+/*doc
+---
+title: List inline
+category: Base - Typo
+---
+
+`list-inline` ou `list-float`
+
+* Fonctionne avec `ul` et `ol`
+* Etendu à `.list-none`
+
+```html_example
+
+  <ul class="list-inline">
+    <li>Item One</li>
+    <li>Item Two</li>
+    <li>Item Three</li>
+  </ul>
+
+```
+
+*/
+.list-inline {
+  @include list-inline;
+}
+
+/*doc
+---
+title: List separate
+category: Base - Typo
+---
+
+* Fonctionne avec `ul` et `ol`
+* Fonctionne uniquement avec `.list-inline`
+
+```html_example
+
+  <ul class="list-inline list-separate">
+    <li>Item One</li>
+    <li>Item Two</li>
+    <li>Item Three</li>
+  </ul>
+
+```
+
+*/
+.list-separate {
+  @include list-separate;
+}
+
+/*doc
+---
+title: Definition
+category: Base - Typo
+---
+
+Mettre en forme une liste de mot avec une description (exemple: clé / valeur.)
+
+```html_example
+
+  <dl>
+    <dt>Description lists</dt>
+    <dd>A description list is perfect for defining terms.</dd>
+    <dt>Euismod</dt>
+    <dd>Vestibulum id ligula porta felis euismod semper eget lacinia</dd>
+    <dt>Malesuada porta</dt>
+    <dd>Etiam porta sem malesuada magna mollis euismod.</dd>
+  </dl>
+
+```
+
+*/
+
+/*doc
+---
+title: Definition horizontale
+category: Base - Typo
+---
+
+```html_example
+
+  <dl class="definition-inline">
+    <dt>Description</dt>
+    <dd>A description list is perfect for defining terms.</dd>
+    <dt>Euismod</dt>
+    <dd>Vestibulum id ligula porta felis euismod semper eget lacinia</dd>
+    <dt>Malesuada</dt>
+    <dd>Etiam porta sem malesuada magna mollis euismod.</dd>
+  </dl>
+
+```
+
+*/
+.definition-inline {
+  @include definition-inline;
+}

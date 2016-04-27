@@ -1,0 +1,27 @@
+
+// Import Variables / Helpers
+@import "../../import";
+
+/*doc
+---
+title: Contextual Links
+category: Module - Contextual Links
+---
+
+Default Style CSS
+
+*/
+
+.contextual-links {
+  padding-right: 0;
+
+  &-wrapper {
+    left: 0;
+    right: auto;
+    text-align: left;
+  }
+
+  .block--locale &-wrapper {
+    text-align: right;
+  }
+}

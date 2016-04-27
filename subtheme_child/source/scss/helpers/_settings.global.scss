@@ -1,0 +1,151 @@
+
+// Settings Global
+// ===============
+
+/// Base font size
+/// @type Length
+$base-font-size: 16px !default;
+
+/// Base line-height
+/// @type Length
+$base-line-height: 24px !default;
+
+/// Body background.
+/// @type Color
+$body-background: #fff !default;
+
+/// Body color.
+/// @type Color
+$body-color: #333 !default;
+
+// Links colors.
+$link-color:         #b14437 !default;
+$link-color-hover:   #2c4a4a !default;
+$link-color-active:  #2c4a4a !default;
+$link-color-visited: #b14437 !default;
+
+/// Selection text color.
+/// @type Color
+$selection-background: #fff8ab !default;
+
+/// Selection text background.
+/// @type Color
+$selection-color: #666 !default;
+
+/// Background color html <mark>.
+/// @type Color
+$highlight-mark-color: #ff0 !default;
+
+// Font stack.
+$font-families: (
+  body: ("Lato", Helvetica, Arial, sans-serif),
+  headline: ("Helvetica Neue", Helvetica, Arial, sans-serif),
+  pre: (Menlo, Monaco, Consolas, "Courier New", monospace),
+  print: ("Helvetica Neue", Helvetica, Arial, sans-serif)
+) !default;
+
+/// default `<dt>` width
+/// @type string
+$definition-inline-width: 150px !default;
+
+/// Définie la typo bold
+/// @see italic
+/// @example scss - Usage SCSS
+///   p {
+///     @include bold;
+///   }
+@mixin bold {
+  font-weight: bold;
+  font-style: normal;
+}
+
+/// Définie la typo italic
+/// @see bold
+/// @example scss - Usage SCSS
+///   p {
+///     @include italic;
+///   }
+@mixin italic {
+  font-weight: normal;
+  font-style: italic;
+}
+
+/*doc
+---
+title: Heading Font Size
+category: Global - Variables
+---
+
+| Key | Value | Example
+|-----|-------|--------
+| h1  |  28px | <h1>.h1 Lorem Ipsum</h1>
+| h2  |  24px | <h2>.h2 Lorem Ipsum</h2>
+| h3  |  20px | <h3>.h3 Lorem Ipsum</h3>
+| h4  |  18px | <h4>.h4 Lorem Ipsum</h4>
+| h5  |  16px | <h5>.h5 Lorem Ipsum</h5>
+| h6  |  14px | <h6>.h6 Lorem Ipsum</h6>
+
+*/
+$font-size: (
+  h1: 28px,
+  h2: 24px,
+  h3: 20px,
+  h4: 18px,
+  h5: 16px,
+  h6: 14px
+) !default;
+
+/*doc
+---
+title: Colorz
+category: Global - Variables
+---
+
+Available for selectors :
+
+* `<key>-color`
+* `<key>-background`
+* `<key>-border`
+
+| Key | Hexa  | Background | Colorz
+|-----|-------|------------|--------
+| default | <span style="color:#b14437">#b14437</span> | <span class="default-background bl pas" sytle="width:200px;height:30px">Lorem Ipsum</span> | <span class="default-color pas">Lorem Ipsum</span>
+| primary | <span style="color:#2c4a4a">#2c4a4a</span> | <span class="primary-background bl pas" sytle="width:200px;height:30px">Lorem Ipsum</span> | <span class="primary-color pas">Lorem Ipsum</span>
+| secondary | <span style="color:#705241">#705241</span> | <span class="secondary-background bl pas" sytle="width:200px;height:30px">Lorem Ipsum</span> | <span class="secondary-color pas">Lorem Ipsum</span>
+
+*/
+$colorz: (
+  default:   #b14437,
+  primary:   #2c4a4a,
+  secondary: #705241,
+) !default;
+
+/// Theme Message
+/// @type Map
+/// @prop {Map} theme
+/// @prop {Color} message.info.color [#477bb6] - Alerte info : couleur
+/// @prop {String} message.info.icon [i-info] - Alerte info : icône
+/// @prop {Color} message.warning.color [#ddae1e] - Alerte warning : couleur
+/// @prop {String} message.warning.icon [i-warning] - Alerte warning : icône
+/// @prop {Color} message.error.color [#b64747] - Alerte erreur : couleur
+/// @prop {String} message.error.icon [i-error] - Alerte erreur : icône
+/// @prop {Color} message.status.color [#77b647] - Alerte succès : couleur
+/// @prop {String} message.status.icon [i-check] - Alerte succès : icône
+$message: (
+  info: (
+    color: #477bb6,
+    icon:  ".i-info",
+  ),
+  warning: (
+    color: #ddae1e,
+    icon:  ".i-warning",
+  ),
+  error: (
+    color: #b64747,
+    icon:  ".i-error",
+  ),
+  status: (
+    color: #77b647,
+    icon:  ".i-check",
+  )
+) !default;

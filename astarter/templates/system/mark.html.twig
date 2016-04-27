@@ -1,0 +1,17 @@
+{#
+/**
+ * Implements theme_mark().
+ *
+ * Change HTML output
+ *
+ * @ingroup themeable
+ */
+#}
+{% if logged_in %}
+  {% if status is constant('MARK_NEW') %}
+    <mark class="mark mark--new">{{ 'New'|t }}</mark>
+  {% elseif status is constant('MARK_UPDATED') %}
+    <mark class="mark mark--updated">{{ 'Updated'|t }}</mark>
+  {% endif %}
+{% endif %}
+<?php

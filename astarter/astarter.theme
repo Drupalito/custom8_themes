@@ -1,0 +1,183 @@
+<?php
+
+/**
+ * @file
+ * Theme functions override
+ */
+
+define('THEME_PATH', base_path() . drupal_get_path('theme', 'astarter'));
+
+use Drupal\Component\Utility\Html;
+use Drupal\Component\Utility\SafeMarkup;
+use Drupal\Component\Utility\Xss;
+use Drupal\Core\Template\Attribute;
+use Drupal\Core\Form\FormStateInterface;
+
+/**
+ * Implements hook_preprocess_page_title().
+ *
+ * @see hook_preprocess_HOOK()
+ */
+function astarter_preprocess_page_title(&$variables) {
+
+  // For futur
+  // $node = \Drupal::routeMatch()->getParameter('node');
+  // if (isset($node) && $node->bundle() == 'article') {
+  //   $variables['title_attributes']['itemprop'][] = 'name';
+  // }
+}
+
+/**
+ * Implements hook_preprocess_page().
+ *
+ * @see hook_preprocess_HOOK()
+ */
+function astarter_preprocess_page(&$variables) {
+  // Current path.
+  $path = \Drupal::routeMatch()->getRouteName();
+
+  // Remove sidebar when specific path.
+  if (preg_match("/(user|system.404)/i", $path) || $variables['is_front']) {
+    unset($variables['page']['sidebar_first']);
+    unset($variables['page']['sidebar_second']);
+  }
+}
+
+/**
+ * Implements hook_preprocess_block().
+ *
+ * @see hook_preprocess_HOOK()
+ */
+function astarter_preprocess_block(&$variables) {
+  // Current theme.
+  $theme = \Drupal::theme()->getActiveTheme()->getName();
+
+  // Block entity
+  $block = entity_load('block', $variables['elements']['#id']);
+
+  // Add default CSS class on block region.
+  if (isset($block) && in_array($block->getRegion(), array('footer'))) {
+    $variables['attributes']['class'][] = 'col-xs-12';
+    $variables['attributes']['class'][] = 'col-sm-6';
+    $variables['attributes']['class'][] = 'col-md-3';
+  }
+}
+
+/**
+ * Implements hook_preprocess_node().
+ *
+ * @see hook_preprocess_HOOK()
+ */
+function astarter_preprocess_node(&$variables) {
+  if ($variables['teaser']) {
+    // Teaser : remove add comment link.
+    if (isset($variables['content']['links']['comment']['#links']['comment-add'])) {
+      unset($variables['content']['links']['comment-add']);
+    }
+  }
+}
+
+/**
+ * Implements hook_preprocess_links().
+ *
+ * @see hook_preprocess_HOOK()
+ */
+function astarter_preprocess_links(&$variables) {
+
+  $variables['links']['node-readmore']['link']['#options']['attributes']['class'][] = 'node__link--readmore';
+  $variables['links']['node-readmore']['link']['#options']['attributes']['rel'] = 'bookmark';
+
+  $variables['links']['comment-add']['link']['#options']['attributes']['class'][] = 'node__link--comment-add';
+}
+
+/**
+ * Implements hook_preprocess_field().
+ *
+ * @see hook_preprocess_HOOK()
+ */
+function astarter_preprocess_field(&$variables) {
+  $element = $variables['element'];
+  $field_type = $variables['field_type'];
+
+  // Creating variables for the template.
+  $variables['bundle_type'] = $element['#bundle'];
+
+  if ($field_type == 'entity_reference') {
+    foreach($variables['items'] AS $k => $field) {
+      if ($field['content']['#options']['entity_type'] == 'taxonomy_term') {
+        // add a class to the <a>.
+        $variables['items'][$k]['content']['#options']['attributes']['class'] = array('taxonomy-term');
+        // add a class to the field item wrapper.
+        $variables['items'][$k]['attributes']->addClass('field-item--taxonomy-term');
+        // add a class to the outer field wrapper.
+        $variables['attributes']['class'][] = 'field--taxonomy-terms';
+        $variables['attributes']['class'][] = 'clearfix';
+      }
+    }
+  }
+}
+
+/**
+ * Implements hook_theme_suggestions_HOOK_alter().
+ *
+ * @see hook_theme_suggestions_alter()
+ */
+function astarter_theme_suggestions_region_alter(array &$suggestions, array $variables) {
+  $elements = $variables['elements'];
+
+  if (in_array($elements['#region'], array(
+    'header',
+    'breadcrumb',
+    'navigation',
+    'content',
+    'footer',
+    'highlighted',
+    'sidebar_first',
+    'sidebar_second',
+  ))) {
+    $suggestions[] = 'region__' . 'no_wrapper';
+  }
+}
+
+/**
+ * Implements hook_page_attachments_alter().
+ *
+ * Remove meta generator
+ * Remove meta viewport
+ * Remove meta content type
+ * Remove HandheldFriendly
+ * Remove MobileOptimized
+ *
+ * @see hook_page_attachments_alter()
+ */
+function astarter_page_attachments_alter(array &$attachments) {
+  foreach ($attachments['#attached']['html_head'] as $key => $attachment) {
+    if ($attachment[1] == 'system_meta_content_type') {
+      unset($attachments['#attached']['html_head'][$key]);
+    }
+    if ($attachment[1] == 'viewport') {
+      unset($attachments['#attached']['html_head'][$key]);
+    }
+    if ($attachment[1] == 'system_meta_generator') {
+      unset($attachments['#attached']['html_head'][$key]);
+    }
+    if ($attachment[1] == 'HandheldFriendly') {
+      unset($attachments['#attached']['html_head'][$key]);
+    }
+    if ($attachment[1] == 'MobileOptimized') {
+      unset($attachments['#attached']['html_head'][$key]);
+    }
+  }
+}
+
+/**
+ * Implements hook_form_alter().
+ */
+function subtheme_child_form_search_block_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state) {
+
+  // $form['#attributes']['role'][] = 'search';
+  // $form['keys']['#attributes']['class'][] = 'search__input';
+  $form['keys']['#attributes']['placeholder'] = t('Search');
+  $form['keys']['#attributes']['title'] = t('Enter your keywords…');
+
+}

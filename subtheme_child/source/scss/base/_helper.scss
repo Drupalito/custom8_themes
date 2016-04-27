@@ -1,0 +1,272 @@
+
+/*doc
+---
+title: Inline-block (Elements)
+category: Base - Helpers
+---
+
+* `.none` - Display: none
+* `.bl` - Display: block
+* `.inbl` - Display: inline-block
+* `.inbl.atop` - Alignment top (default)
+* `.inbl.amiddle` - Alignment middle
+* `.inbl.abottom` - Alignment bottom
+
+*/
+
+.container-inline > div,
+.inbl { @include inline-block(none); }
+
+.atop { vertical-align: top; }
+.abottom { vertical-align: bottom; }
+.amiddle { vertical-align: middle; }
+
+/*doc
+---
+title: Hide Elements
+category: Base - Helpers
+---
+
+* `.show` - Affichage en mode `display-block`
+* `.hide` ou `.hidden` ou `.none` - Cacher en mode `display-none`
+* `.invisible` - Cacher `visibility-hidden`
+* `.element-invisible` - Cacher de facon accessible
+
+*/
+
+// scss-lint:disable ImportantRule
+.hide,
+.hidden,
+.none { display: none !important; }
+
+.show { display: block !important; }
+
+.invisible { visibility: hidden; }
+
+.overhidden { overflow: hidden; }
+
+.overvisible { overflow: visible; }
+
+.element-invisible {
+  font: 0/0 a;
+  color: transparent;
+  text-shadow: none;
+  background-color: transparent;
+  border: 0;
+}
+// scss-lint:enable ImportantRule
+
+// Prevent text wrapping.
+.nowrap { white-space: nowrap; }
+
+/*doc
+---
+title: Clearfix
+category: Base - Helpers
+---
+
+* `%clearfix`
+
+*/
+
+.clearfix {
+  @extend %clearfix;
+}
+
+/*doc
+---
+title: Spacing
+category: Base - Helpers
+---
+
+Should be used to modify the default spacing between objects (not between nodes of the same object)
+Please use judiciously. You want to be using defaults most of the time, these are exceptions!
+
+`<type><location><size>`
+
+Type
+
+* `<p>` : padding
+* `<m>` : margin
+
+Location
+
+* `<a>` : all
+* `<t>` : top
+* `<r>` : right
+* `<b>` : bottom
+* `<l>` : left
+* `<h>` : horizontal
+* `<v>` : vertical
+
+Size
+
+* `<s> small` : #{round($base-line-height / 4)}
+* `<m> medium` : #{round($base-line-height / 2)}
+* `<l> large` : #{$grid-gutter-width}
+* `<n> none` : 0px
+
+*/
+
+// scss-lint:disable SingleLinePerSelector ImportantRule EmptyLineBetweenBlocks
+.ptn, .pvn, .pan { padding-top: 0 !important; }
+.pts, .pvs, .pas { padding-top: round($base-line-height / 4) !important; }
+.ptm, .pvm, .pam { padding-top: round($base-line-height / 2) !important; }
+.ptl, .pvl, .pal { padding-top: $base-line-height !important; }
+.prn, .phn, .pan { padding-right: 0 !important; }
+.prs, .phs, .pas { padding-right: round($grid-gutter-width / 4) !important; }
+.prm, .phm, .pam { padding-right: round($grid-gutter-width / 2) !important; }
+.prl, .phl, .pal { padding-right: $grid-gutter-width !important; }
+.pbn, .pvn, .pan { padding-bottom: 0 !important; }
+.pbs, .pvs, .pas { padding-bottom: round($base-line-height / 4) !important; }
+.pbm, .pvm, .pam { padding-bottom: round($base-line-height / 2) !important; }
+.pbl, .pvl, .pal { padding-bottom: $base-line-height !important; }
+.pln, .phn, .pan { padding-left: 0 !important; }
+.pls, .phs, .pas { padding-left: round($grid-gutter-width / 4) !important; }
+.plm, .phm, .pam { padding-left: round($grid-gutter-width / 2) !important; }
+.pll, .phl, .pal { padding-left: $grid-gutter-width !important; }
+.mtn, .mvn, .man { margin-top: 0 !important; }
+.mts, .mvs, .mas { margin-top: round($base-line-height / 4) !important; }
+.mtm, .mvm, .mam { margin-top: round($base-line-height / 2) !important; }
+.mtl, .mvl, .mal { margin-top: $base-line-height !important; }
+.mrn, .mhn, .man { margin-right: 0 !important; }
+.mrs, .mhs, .mas { margin-right: round($grid-gutter-width / 4) !important; }
+.mrm, .mhm, .mam { margin-right: round($grid-gutter-width / 2) !important; }
+.mrl, .mhl, .mal { margin-right: $grid-gutter-width !important; }
+.mbn, .mvn, .man { margin-bottom: 0 !important; }
+.mbs, .mvs, .mas { margin-bottom: round($base-line-height / 4) !important; }
+.mbm, .mvm, .mam { margin-bottom: round($base-line-height / 2) !important; }
+.mbl, .mvl, .mal { margin-bottom: $base-line-height !important; }
+.mln, .mhn, .man { margin-left: 0 !important; }
+.mls, .mhs, .mas { margin-left: round($grid-gutter-width / 4) !important; }
+.mlm, .mhm, .mam { margin-left: round($grid-gutter-width / 2) !important; }
+.mll, .mhl, .mal { margin-left: $grid-gutter-width !important; }
+// scss-lint:enable SingleLinePerSelector ImportantRule EmptyLineBetweenBlocks
+
+//
+// Responsive: Utility classes
+// --------------------------------------------------
+
+// IE10 in Windows (Phone) 8
+//
+// Support for responsive views via media queries is kind of borked in IE10, for
+// Surface/desktop in split view and for Windows Phone 8. This particular fix
+// must be accompanied by a snippet of JavaScript to sniff the user agent and
+// apply some conditional CSS to *only* the Surface/desktop Windows 8. Look at
+// our Getting Started page for more information on this bug.
+//
+// For more information, see the following:
+//
+// Issue: https://github.com/twbs/bootstrap/issues/10497
+// Docs: http://getbootstrap.com/getting-started/#support-ie10-width
+// Source: http://timkadlec.com/2013/01/windows-phone-8-and-device-width/
+// Source: http://timkadlec.com/2012/10/ie10-snap-mode-and-responsive-design/
+
+// scss-lint:disable SingleLinePerSelector ImportantRule EmptyLineBetweenBlocks
+@at-root {
+  @-ms-viewport {
+    width: device-width;
+  }
+}
+
+@include responsive-invisibility(".visible-xs");
+@include responsive-invisibility(".visible-sm");
+@include responsive-invisibility(".visible-md");
+@include responsive-invisibility(".visible-lg");
+
+.visible-xs-block,
+.visible-xs-inline,
+.visible-xs-inline-block,
+.visible-sm-block,
+.visible-sm-inline,
+.visible-sm-inline-block,
+.visible-md-block,
+.visible-md-inline,
+.visible-md-inline-block,
+.visible-lg-block,
+.visible-lg-inline,
+.visible-lg-inline-block {
+  display: none !important;
+}
+
+@media (max-width: $screen-xs-max) {
+  @include responsive-visibility(".visible-xs");
+}
+
+.visible-xs-block {
+  @media (max-width: $screen-xs-max) {
+    display: block !important;
+  }
+}
+
+.visible-xs-inline-block {
+  @media (max-width: $screen-xs-max) {
+    display: inline-block !important;
+  }
+}
+
+@media (min-width: $screen-sm-min) and (max-width: $screen-sm-max) {
+  @include responsive-visibility(".visible-sm");
+}
+
+.visible-sm-block {
+  @media (min-width: $screen-sm-min) and (max-width: $screen-sm-max) {
+    display: block !important;
+  }
+}
+
+.visible-sm-inline-block {
+  @media (min-width: $screen-sm-min) and (max-width: $screen-sm-max) {
+    display: inline-block !important;
+  }
+}
+
+@media (min-width: $screen-md-min) and (max-width: $screen-md-max) {
+  @include responsive-visibility(".visible-md");
+}
+
+.visible-md-block {
+  @media (min-width: $screen-md-min) and (max-width: $screen-md-max) {
+    display: block !important;
+  }
+}
+
+.visible-md-inline-block {
+  @media (min-width: $screen-md-min) and (max-width: $screen-md-max) {
+    display: inline-block !important;
+  }
+}
+
+@media (min-width: $screen-lg-min) {
+  @include responsive-visibility(".visible-lg");
+}
+
+.visible-lg-block {
+  @media (min-width: $screen-lg-min) {
+    display: block !important;
+  }
+}
+
+.visible-lg-inline-block {
+  @media (min-width: $screen-lg-min) {
+    display: inline-block !important;
+  }
+}
+
+@media (max-width: $screen-xs-max) {
+  @include responsive-invisibility(".hidden-xs");
+}
+
+@media (min-width: $screen-sm-min) and (max-width: $screen-sm-max) {
+  @include responsive-invisibility(".hidden-sm");
+}
+
+@media (min-width: $screen-md-min) and (max-width: $screen-md-max) {
+  @include responsive-invisibility(".hidden-md");
+}
+
+@media (min-width: $screen-lg-min) {
+  @include responsive-invisibility(".hidden-lg");
+}
+
+// scss-lint:enable SingleLinePerSelector ImportantRule EmptyLineBetweenBlocks

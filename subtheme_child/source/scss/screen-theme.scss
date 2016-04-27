@@ -1,0 +1,36 @@
+
+// Import Variables / Helpers
+@import "import";
+
+/**
+ * subtheme_child Drupal Theme
+ * Theme stylesheet
+ *
+ * Styles Globals
+ *
+ * OWNER_NAME <OWNER_EMAIL>
+ * (CURRENT_YEAR)
+ */
+
+// scss-lint:disable Indentation
+
+// Base
+@import
+  "themes/theme";
+
+// Layers
+@import
+  "themes/layers/layer",
+  "themes/layers/header",
+  "themes/layers/footer",
+  "themes/layers/navigation",
+  "themes/layers/aside";
+
+// Overrides Druapl module
+@import
+  "themes/overrides/block",
+  "themes/overrides/field",
+  "themes/overrides/node",
+  "themes/overrides/search";
+
+// scss-lint:enable Indentation

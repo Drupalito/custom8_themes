@@ -1,0 +1,58 @@
+
+// Import Variables / Helpers
+@import "../../import";
+
+/*doc
+---
+title: System menus
+category: Module - System menus
+---
+
+Default Style CSS
+
+*/
+
+.menu {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+
+  .menu {
+    padding-left: 1em;
+  }
+
+  a,
+  li {
+    position: relative;
+  }
+
+  a {
+    display: block;
+    border-bottom: 0;
+  }
+}
+
+// scss-lint:disable QualifyingElement
+li.expanded > a:before,
+li.collapsed > a:before {
+  font-family: "icomoon";
+  position: absolute;
+  top: 50%;
+  right: 5px;
+  margin-top: -12px;
+}
+
+li.expanded > a:before {
+  content: "\edc9";
+}
+
+li.collapsed > a:before {
+  content: "\edc8";
+}
+
+li a.active,
+li.active-trail > a {
+  color: #{map-get($colorz, "primary")};
+}
+
+// scss-lint:enable QualifyingElement

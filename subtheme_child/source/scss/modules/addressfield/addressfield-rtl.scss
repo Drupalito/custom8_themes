@@ -1,0 +1,24 @@
+
+// Import Variables / Helpers
+@import "../../import";
+
+/*doc
+---
+title: Addressfield - RTL
+category: Module - Addressfield
+---
+
+Default Style CSS
+
+*/
+
+.addressfield {
+  &-container-inline {
+
+    .form-item {
+      float: right; /* RTL */
+      margin-left: 1em; /* RTL */
+      margin-right: 0;
+    }
+  }
+}

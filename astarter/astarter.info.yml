@@ -1,0 +1,21 @@
+
+name: astarter
+type: theme
+base theme: classy
+description: Theme created by <a href="http://aquelito.fr">aQuelito</a>.<br />Please see the included README or our <a href="http://aquelito.fr">support</a>.
+core: 8.x
+libraries-override:
+  classy/base: false
+regions:
+  header: 'Banner (Header)'
+  branding: 'Branding (Header)'
+  help: Help
+  highlighted: Highlighted
+  navigation: 'Primary Navigation (Nav)'
+  breadcrumb: Breadcrumb
+  content: Content
+  sidebar_first: 'Sidebar first'
+  sidebar_second: 'Sidebar second'
+  footer: 'Contentinfo (Footer)'
+  page_top: 'Page Top'
+  page_bottom: 'Page Bottom'

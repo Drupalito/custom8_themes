@@ -1,0 +1,20 @@
+{#
+/**
+ * @file
+ * Contains the theme function override for 'menu_local_tasks'.
+ */
+
+/**
+ * Implements theme_menu_local_tasks().
+ *
+ * Remove Title Hn
+ *
+ * @ingroup themeable
+ */
+#}
+{% if primary %}
+  <ul class="tabs tabs--primary primary">{{ primary }}</ul>
+{% endif %}
+{% if secondary %}
+  <ul class="tabs tabs--secondary secondary">{{ secondary }}</ul>
+{% endif %}

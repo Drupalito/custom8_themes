@@ -1,0 +1,102 @@
+
+/*doc
+---
+title: Heading
+category: Global - Typography
+---
+
+## Font heading #{map-get($font-families, 'heading')}
+
+When we define a heading we also define a corresponding class to go with it.
+This allows us to apply, say, `class="h1"` to a `h3`; a double-stranded
+heading hierarchy.
+
+<h1>.h1 - Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod, quasi, laborum consequatur officia eveniet dignissimos</h1>
+<h2>.h2 - Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus, consectetur incidunt officiis neque vitae laboriosam</h2>
+<h3>.h3 - Lorem ipsum dolor sit amet, consectetur adipisicing elit. Doloremque magni minus quos reiciendis beatae illo</h3>
+<h4>.h4 - Lorem ipsum dolor sit amet, consectetur adipisicing elit. At, corrupti totam sed veritatis voluptas aliquid</h4>
+<h5>.h5 - Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium, voluptate recusandae cumque necessitatibus error quas</h5>
+<h6>.h6 - Lorem ipsum dolor sit amet, consectetur adipisicing elit. Velit, reiciendis consequuntur magni facere dolore dolorum</h6>
+
+*/
+
+/*doc
+---
+title: Body
+category: Global - Typography
+---
+
+## Font body #{map-get($font-families, 'body')}
+
+<pre>
+A B C D E F G H I J K L M N O P Q R S T U V W X Y Z
+À Á Â Ã Ä Ç È É Ê Ë Ì Í Î Ï Ñ Ò Ó Ô Õ Ö Ù Ú Û Ü Ý Ÿ
+a b c d e f g h i j k l m n o p q r s t u v w x y z
+à á â ã ä ç è é ê ë ì í î ï ñ ò ó ô õ ö ù ú û ü ý ÿ
+! @ # $ € % ^ & " ' ^ § * ( ) _ + - = ; , . / ? < > [ ] \ { } | ~ ` °
+1 2 3 4 5 6 7 8 9 0
+</pre>
+<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quidem, saepe, et, commodi repellat praesentium vel officia libero maiores odio sit eaque id alias minus eos voluptatem sed nisi quasi tempore aut vitae velit nostrum nesciunt quae reprehenderit veritatis quis facilis.</p>
+
+## Font `italic` body #{map-get($font-families, 'body')}
+
+<pre class="italic">
+A B C D E F G H I J K L M N O P Q R S T U V W X Y Z
+À Á Â Ã Ä Ç È É Ê Ë Ì Í Î Ï Ñ Ò Ó Ô Õ Ö Ù Ú Û Ü Ý Ÿ
+a b c d e f g h i j k l m n o p q r s t u v w x y z
+à á â ã ä ç è é ê ë ì í î ï ñ ò ó ô õ ö ù ú û ü ý ÿ
+! @ # $ € % ^ & " ' ^ § * ( ) _ + - = ; , . / ? < > [ ] \ { } | ~ ` °
+1 2 3 4 5 6 7 8 9 0
+</pre>
+<p class="italic">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quidem, saepe, et, commodi repellat praesentium vel officia libero maiores odio sit eaque id alias minus eos voluptatem sed nisi quasi tempore aut vitae velit nostrum nesciunt quae reprehenderit veritatis quis facilis.</p>
+
+## Font `bold` body #{map-get($font-families, 'body')}
+
+<pre class="bold">
+A B C D E F G H I J K L M N O P Q R S T U V W X Y Z
+À Á Â Ã Ä Ç È É Ê Ë Ì Í Î Ï Ñ Ò Ó Ô Õ Ö Ù Ú Û Ü Ý Ÿ
+a b c d e f g h i j k l m n o p q r s t u v w x y z
+à á â ã ä ç è é ê ë ì í î ï ñ ò ó ô õ ö ù ú û ü ý ÿ
+! @ # $ € % ^ & " ' ^ § * ( ) _ + - = ; , . / ? < > [ ] \ { } | ~ ` °
+1 2 3 4 5 6 7 8 9 0
+</pre>
+<p class="bold">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quidem, saepe, et, commodi repellat praesentium vel officia libero maiores odio sit eaque id alias minus eos voluptatem sed nisi quasi tempore aut vitae velit nostrum nesciunt quae reprehenderit veritatis quis facilis.</p>
+
+*/
+
+/*doc
+---
+title: Markup
+category: Global - Typography
+---
+
+<a href="#">link element</a> example
+<a href="#" class="external">link element external</a>
+<cite>cite element</cite> example
+The <code>code element</code> example
+The <del>del element</del> example
+The <dfn>dfn element</dfn> and <dfn title="Title text">dfn element with title</dfn> examples
+The <em>em element</em> example
+The <i>i element</i> example
+The img element <img alt="" width="16" height="16" src="http://placehold.it/16"> example
+The <ins>ins element</ins> example
+The <kbd>kbd element</kbd> example
+The <mark>mark element</mark> example or <code class="highlight">.highlight</code>
+The <q>q element <q>inside</q> a q element</q> example
+The <s>s element</s> example
+The <samp>samp element</samp> example
+The <small>small element</small> example
+The <span>span element</span> example
+The <strong>strong element</strong> example
+The <sub>sub element</sub> example
+The <sup>sup element</sup> example
+The <u>u element</u> example
+The <var>var element</var> example
+
+To take a screenshot on your Mac, press <kbd>Cmd</kbd> + <kbd>Shift</kbd> + <kbd>3</kbd>.
+
+The coordinate of the <var>i</var>th point is (<var>x<sub><var>i</var></sub></var>, <var>y<sub><var>i</var></sub></var>). For example, the 10th point has coordinate (<var>x<sub>10</sub></var>, <var>y<sub>10</sub></var>).
+
+f(<var>x</var>, <var>n</var>) = log<sub>4</sub><var>x</var><sup><var>n</var></sup>
+
+*/

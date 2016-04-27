@@ -1,0 +1,13 @@
+
+global-styling:
+  version: 1
+  css:
+    theme:
+      css/screen.css: {}
+      css/screen-theme.css: {}
+      css/print.css: { media: print }
+  js:
+    js/main.js: {}
+  dependencies:
+    - core/jquery
+    - core/drupal

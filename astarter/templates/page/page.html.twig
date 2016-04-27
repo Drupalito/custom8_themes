@@ -1,0 +1,104 @@
+{#
+  /**
+   * @file
+   * Returns the HTML for a single Drupal page.
+   *
+   * Complete documentation for this file is available online.
+   * @see //api.drupal.org/api/drupal/core!themes!seven!templates!page.html.twig/8
+   */
+#}
+<div id="page" class="page">
+
+  <div class="page-banner banner">
+    <header id="banner" role="banner" class="banner__region container">
+      <div class="row row-sm-height">
+        <div class="col-xs-12 col-sm-8">
+          {{ page.header }}
+        </div>
+        <div class="col-xs-12 col-sm-4">
+          {% if page.branding %}
+            {{ page.branding }}
+          {% endif %}
+        </div>
+      </div>
+    </header>
+  </div>
+
+  <div class="page-navigation navigation noprint">
+    <nav id="navigation" role="navigation" aria-label="{{ 'Primary navigation'|t }}" class="navigation__region container">
+      <div class="row">
+        {{ page.navigation }}
+      </div>
+    </nav>
+  </div>
+
+  <div class="page-container">
+    <div id="container" class="container__region container">
+      <div class="row">
+
+        {# Highlighted #}
+        {% if page.highlighted %}
+          {{ page.highlighted }}
+        {% endif %}
+
+        {# Breadcrumbs #}
+        {% if page.breadcrumb %}
+          {{ page.breadcrumb }}
+        {% endif %}
+
+        {% if page.sidebar_first %}
+          <div class="aside aside--left col-xs-12 col-sm-4">
+            <aside id="aside_left" role="complementary" class="aside__region">
+              {{ page.sidebar_first }}
+            </aside>
+          </div>
+        {% endif %}
+
+        {# Content #}
+        {%
+          set content_classes = [
+            page.sidebar_first and page.sidebar_second ? 'col-xs-12 col-sm-4',
+            page.sidebar_first and page.sidebar_second is empty ? 'col-xs-12 col-sm-8',
+            page.sidebar_second and page.sidebar_first is empty ? 'col-xs-12 col-sm-8',
+            page.sidebar_first is empty and page.sidebar_second is empty ? 'col-xs-12'
+          ]
+        %}
+        <div{{ content_attributes.addClass(content_classes) }}>
+          {# Help #}
+          {% if page.help %}
+            <div class="help">
+              {{ page.help }}
+            </div>
+          {% endif %}
+
+          <main id="main" class="main" role="main">
+            {# Content #}
+            {% if page.content %}
+              {{ page.content }}
+            {% endif %}
+          </main>
+        </div>
+
+        {% if page.sidebar_second %}
+          <div class="aside aside--right col-xs-12 col-sm-4">
+            <aside id="aside_right" role="complementary" class="aside__region">
+              {{ page.sidebar_second }}
+            </aside>
+          </div>
+        {% endif %}
+
+      </div>
+    </div>
+  </div>
+
+  {% if page.footer %}
+    <div class="page-contentinfo contentinfo">
+      <footer id="contentinfo" role="contentinfo" class="contentinfo__region container">
+        <div class="row">
+          {{ page.footer }}
+        </div>
+      </footer>
+    </div>
+  {% endif %}
+
+</div>

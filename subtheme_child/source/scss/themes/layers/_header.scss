@@ -1,0 +1,102 @@
+
+/*doc
+---
+title: Header
+category: Layout - Layer
+---
+
+```html_example
+
+  <div class="banner">
+    <header id="banner" role="banner" class="container clearfix">
+      <div class="row">
+        ...
+      </div>
+    </header>
+  </div>
+
+```
+
+*/
+
+.banner {
+  background: #{map-get($colorz, "primary")};
+
+  &,
+  a {
+    color: #fff;
+  }
+
+  @include mq("smaller") {
+    .col-xs-12.col-sm-8 {
+      margin-bottom: 1em;
+    }
+  }
+}
+
+.branding {
+  text-align: right; /* LTR */
+}
+
+/*doc
+---
+title: Logo
+category: Layout - Layer
+---
+
+Default markup. (`title` = `alt`)
+
+```html_example
+
+  <div class="logo">
+    <p class="logo__inner">
+      <a href="/" title="starterProjectName, Lorem ipsum dolor sit (Home)" rel="home" class="logo__link nounderline">
+        <img class="logo__image" src="http://placehold.it/250x72" alt="starterProjectName, Lorem ipsum dolor sit (Home)">
+        <span class="logo__content inbl amiddle pls">
+          <span class="logo__name h4 caps show mvn">starterProjectName</span>
+          <span class="logo__slogan show">Lorem ipsum dolor sit</span>
+        </span>
+      </a>
+    </p>
+  </div>
+
+```
+
+*/
+
+.logo {
+  &__name {
+    @include bold;
+    margin: 0;
+    text-transform: uppercase;
+    font-size: 150%;
+  }
+
+  &__name,
+  &__slogan {
+    display: block;
+  }
+
+  &__link {
+    border-bottom: 0;
+  }
+
+  @include mq("smaller") {
+    &__content {
+      margin-top: 1em;
+      display: block;
+    }
+  }
+
+  @include mq("small") {
+    &__link {
+      display: table;
+    }
+
+    &__content {
+      display: table-cell;
+      vertical-align: middle;
+      padding-left: 1em; /* LTR */
+    }
+  }
+}

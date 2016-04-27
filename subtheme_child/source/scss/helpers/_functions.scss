@@ -1,0 +1,38 @@
+
+// Functions
+// =========
+
+/// Clearfix extend
+/// @example scss - Usage SCSS
+///   .foo {
+///     @extend %clearfix;
+///   }
+%clearfix {
+  &:after {
+    clear: both;
+    content: "";
+    display: table;
+  }
+}
+
+/// Convert px to em.
+/// @see list-inline
+/// @see list-separate
+/// @see definition-inline
+/// @param {string} $px - Font size
+/// @param {string} $base [$base-font-size] - Base font size
+/// @example scss - Usage SCSS
+///   p {
+///     font-size: pem(16px);
+///   }
+///
+///   p {
+///     font-size: pem(16px, 48px);
+///   }
+@function pem(
+  $px,
+  $base: $base-font-size
+  ) {
+
+  @return ($px / $base) * 1em;
+}

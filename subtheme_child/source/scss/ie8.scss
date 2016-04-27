@@ -1,0 +1,57 @@
+
+// Import Variables / Helpers
+@import "import";
+
+/**
+ * subtheme_child Drupal Theme
+ * Internet Explorer 8
+ * IE8 : deprecated
+ *
+ * OWNER_NAME <OWNER_EMAIL>
+ * (CURRENT_YEAR)
+ */
+
+.btn[disabled],
+.btn--disabled {
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=60)"; // IE 8
+}
+
+.clearfix { zoom: 1; }
+
+ul,
+ol { margin-left: 0; }
+kbd { font-size: 85%; } // bugfix IE7
+legend { margin-left: -7px; } // bugfix IE7 (http://jamesfrank.info/2011/06/18/fieldset-legends-ie7/)
+
+// 1. Correct font family not being inherited in all browsers.
+// 2. Correct font size not being inherited in all browsers.
+button,
+input,
+select,
+textarea {
+  vertical-align: middle; // bugfix IE7
+}
+
+button,
+html input[type="button"],
+input[type="button"],
+input[type="reset"],
+input[type="submit"] {
+  overflow: visible; // bugfix IE7
+}
+
+input[type="radio"],
+input[type="checkbox"] {
+  border: 0;
+  height: 12px;
+  width: 12px;
+}
+
+select {
+  padding: 6px 5px 5px;
+
+  &,
+  &:hover {
+    background-image: none;
+  }
+}

@@ -1,0 +1,84 @@
+
+/*doc
+---
+title: Pagination
+category: Components - Pagination
+---
+
+* `.text-center` : align center
+* `.text-right` : align right
+
+Simple pagination. The large block is hard to miss, easily scalable, and provides large click areas.
+Le titre peut être caché avec `.hide`
+
+```html_example
+
+  <div class="pagination clearfix">
+    <h2 class="pagination__title h5 mvn">Page 2 of 5</h2>
+    <ul class="pagination__list list-inline mvn">
+      <li class="pagination__item"><a class="pagination__link pagination__prev" rel="prev" href="#" title="Go to prev page (1 of 5)"><span class="i i-arrow-left"></span> Prev</a></li>
+      <li class="pagination__item"><a rel="noindex follow" class="pagination__link" href="#" title="Go to page 1 of 5">1</a></li>
+      <li class="pagination__item pagination--current"><strong>2</strong></li>
+      <li class="pagination__item"><a rel="noindex follow" class="pagination__link" href="#" title="Go to page 3 of 5">3</a></li>
+      <li class="pagination__item"><a rel="noindex follow" class="pagination__link" href="#" title="Go to page 4 of 5">4</a></li>
+      <li class="pagination__item"><a rel="noindex follow" class="pagination__link" href="#" title="Go to page 5 of 5">5</a></li>
+      <li class="pagination__item"><a class="pagination__link pagination__next" rel="next" href="#" title="Go to next page (3 of 5)">Next <span class="i i-arrow-right"></span></a></li>
+    </ul>
+  </div>
+
+  <div class="pagination text-center mtl clearfix">
+    <h2 class="pagination__title h5 mvn">Page 2 of 5</h2>
+    <ul class="pagination__list list-inline mvn">
+      <li class="pagination__item"><a class="pagination__link pagination__prev" rel="prev" href="#" title="Go to prev page (1 of 5)"><span class="i i-arrow-left"></span> Prev</a></li>
+      <li class="pagination__item"><a rel="noindex follow" class="pagination__link" href="#" title="Go to page 1 of 5">1</a></li>
+      <li class="pagination__item pagination--current"><strong>2</strong></li>
+      <li class="pagination__item"><a rel="noindex follow" class="pagination__link" href="#" title="Go to page 3 of 5">3</a></li>
+      <li class="pagination__item"><a rel="noindex follow" class="pagination__link" href="#" title="Go to page 4 of 5">4</a></li>
+      <li class="pagination__item"><a rel="noindex follow" class="pagination__link" href="#" title="Go to page 5 of 5">5</a></li>
+      <li class="pagination__item"><a class="pagination__link pagination__next" rel="next" href="#" title="Go to next page (3 of 5)">Next <span class="i i-arrow-right"></span></a></li>
+    </ul>
+  </div>
+
+  <div class="pagination text-right mtl clearfix">
+    <h2 class="pagination__title h5 mvn">Page 2 of 5</h2>
+    <ul class="pagination__list list-inline mvn">
+      <li class="pagination__item"><a class="pagination__link pagination__prev" rel="prev" href="#" title="Go to prev page (1 of 5)"><span class="i i-arrow-left"></span> Prev</a></li>
+      <li class="pagination__item"><a rel="noindex follow" class="pagination__link" href="#" title="Go to page 1 of 5">1</a></li>
+      <li class="pagination__item pagination--current"><strong>2</strong></li>
+      <li class="pagination__item"><a rel="noindex follow" class="pagination__link" href="#" title="Go to page 3 of 5">3</a></li>
+      <li class="pagination__item"><a rel="noindex follow" class="pagination__link" href="#" title="Go to page 4 of 5">4</a></li>
+      <li class="pagination__item"><a rel="noindex follow" class="pagination__link" href="#" title="Go to page 5 of 5">5</a></li>
+      <li class="pagination__item"><a class="pagination__link pagination__next" rel="next" href="#" title="Go to next page (3 of 5)">Next <span class="i i-arrow-right"></span></a></li>
+    </ul>
+  </div>
+
+```
+
+*/
+
+.pagination {
+  &__link,
+  &--current strong {
+    border: 1px solid;
+    border-radius: 0.2rem;
+    text-decoration: none;
+    text-transform: uppercase;
+    display: inline-block;
+    text-align: center;
+    padding: 0.5rem 0.9rem;
+    color: #7d7d7d;
+  }
+
+  &--current strong {
+    background: #{map-get($colorz, "primary")};
+    color: #fff;
+  }
+
+  &__link {
+    &:hover,
+    &:focus {
+      background: #{map-get($colorz, "default")};
+      color: #fff;
+    }
+  }
+}

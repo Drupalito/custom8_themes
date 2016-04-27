@@ -1,0 +1,52 @@
+
+/*doc
+---
+title: Aside
+category: Layout - Layer
+---
+
+Combine `.aside` with the modifier `.aside--right`
+
+```html_example
+
+  <div class="complementary aside">
+    <aside id="complementary" role="complementary">
+      ...
+    </aside>
+  </div>
+
+```
+
+*/
+
+.aside {
+  .block {
+    padding: 1em;
+    margin-top: 1.5em;
+    margin-bottom: 1.5em;
+    background: #fff;
+
+    &__title {
+      padding-bottom: rhythm(0.5);
+      border-bottom: pem(1px) solid #ccc;
+      margin-bottom: rhythm(0.5);
+    }
+
+    &--first {
+      margin-top: 0;
+    }
+
+    &--last {
+      margin-bottom: 0;
+    }
+  }
+
+  .block--menu {
+    border: pem(1px) solid #ccc;
+    background: #f2f2f2;
+  }
+
+  @include mq("smaller") {
+    margin-bottom: 1.5em;
+  }
+}

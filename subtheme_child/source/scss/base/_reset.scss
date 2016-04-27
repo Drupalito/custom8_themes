@@ -1,0 +1,797 @@
+// scss-lint:disable QualifyingElement
+
+// ==========================================================================
+// @file:
+// SASS normalize based on normalize.css v2.0.1
+// MIT License | Copyright (c) Nicolas Gallagher and Jonathan Neal
+// @see: git.io/normalize
+// ==========================================================================
+
+// http://paulirish.com/2012/box-sizing-border-box-ftw/
+// apply a natural box layout model to all elements
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+
+// HTML5 display-role reset for older browsers
+article,
+aside,
+audio,
+canvas,
+details,
+figure,
+figcaption,
+footer,
+header,
+main,
+nav,
+section,
+summary,
+video {
+  display: block;
+}
+
+// Correct `inline-block` display not defined in IE 8/9.
+audio,
+canvas,
+progress,
+video {
+  display: inline-block;
+}
+
+// Prevent modern browsers from displaying `audio` without controls.
+[hidden],
+audio:not([controls]) {
+  @extend .none; // Address styling not present in IE 8/9.
+}
+
+// Remove excess height in iOS 5 devices.
+audio:not([controls]) {
+  height: 0;
+}
+
+html,
+body,
+form,
+figure {
+  padding: 0;
+  margin: 0;
+}
+
+// Scripts
+body {
+  background: $body-background;
+  color: $body-color;
+  // > script { @extend .none; }
+}
+
+// Baseline
+@include establish-baseline;
+
+// Heading Title
+@each $hn, $size in $font-size {
+  #{$hn}, .#{$hn} {
+    @include font-size($size);
+    margin-top: rhythm(1, $size);
+    margin-bottom: rhythm(1, $size);
+  }
+}
+
+// scss-lint:disable SingleLinePerSelector
+h1, .h1,
+h2, .h2,
+h3, .h3,
+h4, .h4,
+h5, .h5,
+h6, .h6 {
+  font-family: #{map-get($font-families, "headline")};
+  font-weight: 700;
+  font-style: normal;
+}
+// scss-lint:enable SingleLinePerSelector
+
+// Heading elements
+blockquote,
+pre,
+figure,
+p,
+ul,
+ol,
+dl,
+table,
+.table-responsive,
+.alignleft,
+.alignright,
+.alignnone {
+  margin-top: rhythm(1);
+  margin-bottom: rhythm(1);
+}
+
+// avoid collapsing margins
+p:first-child,
+ul:first-child,
+ol:first-child,
+dl:first-child,
+pre:first-child,
+blockquote:first-child,
+table:first-child,
+h1:first-child,
+h2:first-child,
+h3:first-child,
+h4:first-child,
+h5:first-child,
+h6:first-child {
+  margin-top: 0;
+}
+
+p:last-child,
+ul:last-child,
+ol:last-child,
+dl:last-child,
+pre:last-child,
+blockquote:last-child,
+table:last-child {
+  margin-bottom: 0;
+}
+
+// defaut links
+a {
+  text-decoration: none;
+  border-bottom: 1px solid;
+  background: transparent; // Remove the gray background color from active links in IE 10.
+  color: $link-color;
+
+  &:hover,
+  &:focus,
+  &:active {
+    border-color: transparent;
+    color: $link-color-hover;
+  }
+}
+
+// Address `outline` inconsistency between Chrome and other browsers.
+// a:focus { outline: thin dotted; }
+
+// Firefox 4+, Safari 5, et Chrome.
+strong { @extend .bold; }
+
+// gist.github.com/413930
+sub,
+sup {
+  position: relative;
+  vertical-align: baseline;
+  font-variant: small-caps;
+  line-height: 0;
+}
+
+sup { top: -0.5em; }
+sub { bottom: -0.25em; }
+
+// 1. Internet Explorer, Chrome, Safari
+abbr[title],
+dfn[title] {
+  border-bottom: 1px dotted; // 1
+  cursor: help;
+}
+
+dfn[title] {
+  @extend .bold;
+  @extend .italic;
+}
+
+code,
+kbd,
+samp {
+  padding: 2px 4px;
+  line-height: normal;
+  color: #a00c31;
+}
+
+kbd {
+  border: 1px dotted;
+  background: #000;
+  color: #fff;
+}
+
+code {
+  font-size: 90%;
+  background: #f7f7f7;
+}
+
+ins {
+  text-decoration: none;
+  border-bottom: 1px dashed;
+  color: #005d23;
+}
+
+mark,
+.highlight {
+  padding: 2px 4px;
+  background: $highlight-mark-color;
+  color: #000;
+}
+
+dd {
+  margin-left: 0; /* LTR */
+}
+
+/*doc
+---
+title: Ordered list and Unordered list
+category: Base - Base
+---
+
+```html_example
+
+  <ul>
+    <li>Unordered list test</li>
+    <li>Another list element. Lorem ipsum dolor sit amet, consectetur elit.</li>
+    <li>Yet another element in the list</li>
+    <li>Some long text. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Lorem ipsum dolor sit amet, consectetur adipisicing elit.</li>
+  </ul>
+  <ol>
+    <li>Ordered list test</li>
+    <li>Another list element</li>
+    <li>Yet another element in the list</li>
+  </ol>
+  <ul>
+    <li>Ordered list</li>
+    <li>Another list element
+      <ul>
+        <li>Nested Unordered list</li>
+        <li>Nested ordered list</li>
+      </ul>
+    </li>
+    <li>Ordered List item</li>
+    <li>Nested Ordered list
+      <ul>
+        <li>Some point</li>
+        <li>Nested Unordered list</li>
+      </ul>
+    </li>
+  </ul>
+
+```
+
+*/
+
+ul,
+ol {
+  padding-left: rhythm(1); /* LTR */
+}
+
+li {
+  p,
+  ul,
+  ol {
+    margin-bottom: 0;
+  }
+}
+
+ol {
+  list-style-type: decimal;
+
+  ol {
+    list-style-type: upper-alpha;
+  }
+}
+
+dt { @extend strong; }
+
+/*doc
+---
+title: Address
+category: Base - Base
+---
+
+Mise en forme d'une adresse postale
+
+```html_example
+
+  <address>
+    <p>
+      <strong>Axel Roche,</strong><br />
+      184 rue du Bled,<br />
+      33000 Bordeaux (France)<br />
+      <abbr title="Téléphone">Tél.</abbr> : 06 58 28 56 67<br />
+      <abbr title="Fax">Fax.</abbr> : 05 57 55 55 55
+      <a href="mailto:axel@aquelito.fr">axel@aquelito.fr</a><br />
+      <a href="http://aquelito.fr">aquelito.fr</a>
+    </p>
+  </address>
+  <address class="mtl">
+    <p>
+      <strong>John.doe</strong><br />
+      <a href="mailto:john.doe@gmail.com">john.doe@gmail.com</a><br />
+      <a href="http://google.com">Google.com</a>
+    </p>
+  </address>
+
+```
+
+*/
+
+/*doc
+---
+title: Images
+category: Base - Media Elements
+---
+
+iframe & image & object & video
+
+```html_example
+
+  <img src="http://lorempixel.com//825/400/animals/1" alt="" />
+
+```
+
+*/
+
+img,
+svg,
+object,
+video {
+  max-width: 100%; // to prevent overflow
+  vertical-align: middle; // Supprime l'espace indésirable appraissant sous les images
+  height: auto; // to keep aspect ratio
+  width: auto; // bugfix IE8
+}
+
+a img,
+iframe {
+  border: 0; // bugfix IE8, FF3.6 (Supprime la bordure des images se trouvant dans un lien.)
+}
+
+/*doc
+---
+title: Figcaption
+category: Base - Media Elements
+---
+
+```html_example
+
+  <figure>
+    <img src="http://lorempixel.com//825/400/animals/2" alt="Some animals image" />
+    <figcaption>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</figcaption>
+  </figure>
+
+```
+
+*/
+
+figcaption {
+  @extend .italic;
+  font-size: 0.85em;
+}
+
+/*doc
+---
+title: Thumbnails
+category: Base - Media Elements
+---
+
+```html_example
+
+  <div class="row">
+    <div class="col-xs-6 col-md-3">
+      <a href="#" class="thumbnail">
+        <img src="http://lorempixel.com/300/300/animals/3" alt="" />
+      </a>
+    </div>
+    <div class="col-xs-6 col-md-3">
+      <a href="#" class="thumbnail">
+        <img src="http://lorempixel.com/300/300/animals/4" alt="" />
+      </a>
+    </div>
+    <div class="col-xs-6 col-md-3">
+      <a href="#" class="thumbnail">
+        <img src="http://lorempixel.com/300/300/animals/5" alt="" />
+      </a>
+    </div>
+    <div class="col-xs-6 col-md-3">
+      <a href="#" class="thumbnail">
+        <img src="http://lorempixel.com/300/300/animals/6" alt="" />
+      </a>
+    </div>
+  </div>
+
+```
+
+*/
+
+hr {
+  @extend .clear;
+  $color-hr: #000;
+  height: 0;
+  padding: 0;
+  margin: 0 0 ($base-line-height - 1px);
+  overflow: visible;
+  border-top: 1px solid;
+  background: $color-hr;
+  color: $color-hr;
+}
+
+/*doc
+---
+title: Blockquote
+category: Base - Base
+---
+
+```html_example
+
+  <blockquote>
+    <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et me.</p>
+  </blockquote>
+
+```
+
+*/
+
+pre,
+blockquote {
+  padding-left: 1.5em; /* LTR */
+  border-left: 1.5em solid; /* LTR */
+  clear: both;
+}
+
+/*doc
+---
+title: Blockquote cite
+category: Base - Base
+---
+
+```html_example
+
+  <blockquote>Those people who think they know everything are a great annoyance to those of us who do.<cite>Isaac Asimov</cite></blockquote>
+
+```
+
+*/
+
+blockquote {
+  @include italic;
+
+  cite {
+    display: block;
+    font-size: 80%;
+    font-style: normal;
+    color: #666;
+
+    &:before {
+      content: "\2014 \0020";
+    }
+  }
+
+  p {
+    margin-bottom: rhythm(0.5);
+  }
+}
+
+pre {
+  @include font-size;
+  white-space: pre;
+  font-family: #{map-get($font-families, "pre")};
+
+  code {
+    padding: 0;
+    border: 0;
+    background: transparent;
+  }
+}
+
+code,
+pre,
+samp {
+  white-space: pre-wrap;
+}
+
+/*doc
+---
+title: Quotes
+category: Base - Base
+---
+
+*/
+
+// { quotes: '“' '”' '‘' '’'; }
+// extra content definitions for pre-2011 WebKit
+// q:before    { content: '“'; content: open-quote; }
+// q:after     { content: '”'; content: close-quote; }
+// q q:before  { content: '‘'; content: open-quote; }
+// q q:after   { content: '’'; content: close-quote; }
+
+q { quotes: "\201C" "\201D" "\2018" "\2019"; }
+
+// Opening followed by closing quote pairs
+// q { quotes: '“' '”' '‘' '’'; }
+// The equivalent using Unicode escapes:
+// q { quotes: '\201C' '\201D' '\2018' '\2019'; }
+// q:before { content: open-quote; }
+// q:after  { content: close-quote; }
+
+// Quotes for French, German (two kinds), Italian and  Spanish
+:lang(fr) q { quotes: "\ab\2005" "\2005\bb" "\2039\2005" "\2005\203a"; }
+// :lang(de) q { quotes:"\201E" "\201C" "\201A" "\2018"; }
+// :lang(es) q { quotes:"\00AB" "\00BB" "\2039" "\203A"; }
+// :lang(it) q { quotes: "\00AB\A0" "\A0\00BB" "\201C" "\201D"; }
+
+/*doc
+---
+title: Table
+category: Base - Table
+---
+
+```html_example
+
+  <table>
+    <caption>Jimi Hendrix - albums</caption>
+    <thead>
+      <tr>
+        <th>Album</th>
+        <th>Year</th>
+        <th>Price</th>
+      </tr>
+    </thead>
+    <tfoot>
+      <tr>
+        <th>Album</th>
+        <th>Year</th>
+        <th>Price</th>
+      </tr>
+    </tfoot>
+    <tbody>
+      <tr>
+        <td>Are You Experienced</td>
+        <td>1967</td>
+        <td>$10.00</td>
+      </tr>
+      <tr>
+        <td>Axis: Bold as Love</td>
+        <td>1967</td>
+        <td>$12.00</td>
+      </tr>
+      <tr>
+        <td>Electric Ladyland</td>
+        <td>1968</td>
+        <td>$10.00</td>
+      </tr>
+      <tr>
+        <td>Band of Gypsys</td>
+        <td>1970</td>
+        <td>$12.00</td>
+      </tr>
+    </tbody>
+  </table>
+
+```
+
+*/
+
+/*doc
+---
+title: Table Responsive
+category: Base - Table
+---
+
+Faire une table responsive ajouté un wrapper autour de l'élément `<table>`
+`<div class="table-responsive">`
+
+```html_example
+
+  <div class="table-responsive">
+    <table>
+      ...
+    </table>
+  </div>
+
+```
+
+*/
+
+/*doc
+---
+title: Table Striped
+category: Base - Table
+---
+
+```html_example
+
+  <table class="table">
+    <caption>Jimi Hendrix - albums</caption>
+    <thead>
+      <tr>
+        <th>Album</th>
+        <th>Year</th>
+        <th>Price</th>
+        <th>Price</th>
+        <th>Price</th>
+        <th>Price</th>
+        </tr>
+    </thead>
+    <tfoot>
+      <tr>
+        <th>Album</th>
+        <th>Year</th>
+        <th>Price</th>
+        <th>Price</th>
+        <th>Price</th>
+        <th>Price</th>
+      </tr>
+    </tfoot>
+    <tbody>
+      <tr>
+        <td>Are You Experienced</td>
+        <td>1967</td>
+        <td>$10.00</td>
+        <td>$12.00</td>
+        <td>$12.00</td>
+        <td>$12.00</td>
+      </tr>
+      <tr>
+        <td>Axis: Bold as Love</td>
+        <td>1967</td>
+        <td>$12.00</td>
+        <td>$12.00</td>
+        <td>$12.00</td>
+        <td>$12.00</td>
+      </tr>
+      <tr>
+        <td>Electric Ladyland</td>
+        <td>1968</td>
+        <td>$10.00</td>
+        <td>$12.00</td>
+        <td>$12.00</td>
+        <td>$12.00</td>
+      </tr>
+      <tr>
+        <td>Band of Gypsys</td>
+        <td>1970</td>
+        <td>$12.00</td>
+        <td>$12.00</td>
+        <td>$12.00</td>
+        <td>$12.00</td>
+      </tr>
+    </tbody>
+  </table>
+
+```
+
+*/
+
+table {
+  caption-side: top;
+
+  &,
+  .table {
+    width: 100%;
+    max-width: 100%;
+    display: table;
+    border-collapse: collapse; // fusion des bordures
+    vertical-align: top;
+  }
+}
+
+.table--fixed {
+  table-layout: fixed;
+}
+
+th,
+th a {
+  background: $body-color;
+  color: #fff;
+}
+
+th,
+td {
+  padding: rhythm(0.5) ($grid-gutter-width / 2);
+  border-bottom: 1px solid #ccc;
+  text-align: left; /* LTR */
+
+  .views-row-last & {
+    border-bottom: 0;
+  }
+}
+
+tfoot {
+  th,
+  td {
+    border-bottom: 0;
+  }
+}
+
+caption,
+table td {
+  color: #666;
+}
+
+caption {
+  @extend .italic;
+  @extend .mbm;
+}
+
+tbody {
+  border: 1px solid #ccc;
+
+  tr {
+    > * + * {
+      border-left: 1px solid #ccc;
+    }
+  }
+}
+
+.views-row-odd,
+tbody tr:nth-child(odd) {
+  background: #ececec;
+}
+
+.views-row-even,
+tbody tr:nth-child(even) {
+  background: #f7f7f7;
+}
+
+th.active,
+th.active a {
+  background: #{map-get($colorz, "primary")};
+  color: #fff;
+}
+
+td.active {
+  tbody tr:nth-child(odd) & {
+    background: darken(#ececec, 5%);
+  }
+
+  tbody tr:nth-child(even) & {
+    background: darken(#f7f7f7, 5%);
+  }
+}
+
+.table-responsive {
+  width: 100%;
+  overflow-x: scroll;
+  overflow-y: hidden;
+  border: 1px solid #ccc;
+  -webkit-overflow-scrolling: touch;
+  -ms-overflow-style: -ms-autohiding-scrollbar;
+
+  th,
+  td {
+    white-space: nowrap;
+  }
+
+  td {
+    .views-row-last & {
+      border-bottom: 0;
+    }
+  }
+
+  tbody {
+    border-left: 0;
+    border-right: 0;
+    border-bottom: 0;
+  }
+}
+
+/* */
+
+// // scss-lint:disable VendorPrefix
+// // Supprime l'ombre portée du texte lors de sa sélection.
+// // @see   h5bp.com/
+// // @note  Les couleurs de texte et d'arrière-plan doivent être rédéfinies pour que l'instruction soit appliquée.
+// ::selection {
+//   text-shadow: none;
+//   color: $selection-color;
+//   background-color: $selection-background;
+// }
+
+// // Supprime l'ombre portée du texte lors de sa sélection.
+// // @bugfix  Firefox
+// ::-moz-selection {
+//   text-shadow: none;
+//   color: $selection-color;
+//   background-color: $selection-background
+// }
+// // scss-lint:enable VendorPrefix
+
+// scss-lint:enable QualifyingElement

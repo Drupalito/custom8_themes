@@ -1,0 +1,265 @@
+
+/*doc
+---
+title: Debug
+category: Debug - Grid
+---
+
+Ajouter ce fichier à votre page pour debugger
+les grilles bootstrap.
+
+*/
+
+$color-default: #eff8a0;
+$color-border: #fff;
+$color-clearfix: #f00;
+
+$color-xs: rgba(246, 233, 205, 1);
+$color-xs-bg: rgba(246, 233, 205, 0.3);
+$color-xs-bg-iterate: rgba(246, 233, 205, 0.5);
+
+$color-sm: rgba(205, 237, 206, 1);
+$color-sm-bg: rgba(205, 237, 206, 0.3);
+$color-sm-bg-iterate: rgba(205, 237, 206, 0.5);
+
+$color-md: rgba(231, 205, 246, 1);
+$color-md-bg: rgba(231, 205, 246, 0.3);
+$color-md-bg-iterate: rgba(231, 205, 246, 0.5);
+
+$color-lg: rgba(205, 232, 246, 1);
+$color-lg-bg: rgba(205, 232, 246, 0.3);
+$color-lg-bg-iterate: rgba(205, 232, 246, 0.5);
+
+// create debug grid output
+@mixin debug-grid-cols($type, $color, $color-bg, $color-bg-iterate) {
+
+  [class*="col-#{$type}-pull-"],
+  [class*="col-#{$type}-push-"],
+  [class*="col-#{$type}-offset-"] {
+    content: "";
+  }
+
+  .aside, .content,
+  [class*="col-#{$type}-"] {
+    background-color: $color-bg;
+  }
+
+  [class*="col-#{$type}-"]:nth-child(odd) {
+    background-color: $color-bg-iterate;
+  }
+
+  // set col content & color 4 grid-cols (after)
+  @for $j from 1 through 12 {
+
+    .col-#{$type}-#{$j}:after {
+      content: "\00a0 .col-" + $type + "-" + $j + " \00a0";
+      background-color: $color;
+    }
+
+    .col-#{$type}-pull-#{$j}:before {
+      content: "\00a0 << .col-" + $type + "-pull-" + $j + " \00a0";
+    }
+
+    .col-#{$type}-push-#{$j}:before {
+      content: "\00a0 >> .col-" + $type + "-push-" + $j + " \00a0";
+    }
+
+  }
+
+  @for $i from 0 through 12 {
+
+    .col-#{$type}-offset-#{$i}:before {
+      content: "\00a0 << .col-" + $type + "-offset-" + $i + " \00a0";
+    }
+
+  }
+
+}
+
+.debug-output {
+  content: "";
+  position: absolute;
+  top: 1px;
+  right: 1px;
+  font-size: 10px;
+  font-style: italic;
+  color: #000;
+  background-color: $color-default;
+  white-space: nowrap;
+}
+
+body:before {
+  @extend .debug-output;
+  content: "\00a0 Large screen (lg) \00a0";
+  background-color: $color-lg;
+  position: fixed;
+  z-index: 2000;
+}
+
+.aside,
+.content,
+[class*="col-"] {
+  box-shadow: rgba(#000, 0.05) 0 0 0 1px inset;
+
+  &:after {
+    @extend .debug-output;
+    min-width: 56px;
+  }
+
+  &:before {
+    @extend .debug-output;
+    right: 57px;
+  }
+
+}
+
+@include debug-grid-cols("xs", $color-xs, $color-xs-bg, $color-xs-bg-iterate);
+@include debug-grid-cols("sm", $color-sm, $color-sm-bg, $color-sm-bg-iterate);
+@include debug-grid-cols("md", $color-md, $color-md-bg, $color-md-bg-iterate);
+
+[class*="col-md-pull-"]:before,
+[class*="col-md-push-"]:before,
+[class*="col-md-offset-"]:before,
+[class*="col-sm-pull-"]:before,
+[class*="col-sm-push-"]:before,
+[class*="col-sm-offset-"]:before,
+[class*="col-xs-pull-"]:before,
+[class*="col-xs-push-"]:before,
+[class*="col-xs-offset-"]:before {
+  content: "";
+}
+
+@include debug-grid-cols("lg", $color-lg, $color-lg-bg, $color-lg-bg-iterate);
+
+// large desktop
+@media (min-width: $screen-lg-min) {
+  .clearfix.visible-lg:after {
+    content: "\00a0 .clearfix .visible-lg";
+    font-size: 10px;
+    font-style: italic;
+    color: $color-clearfix;
+    width: 100%;
+  }
+}
+
+// desktop
+@media (max-width: $screen-md-max) {
+
+  [class*="col-lg-pull-"]:before,
+  [class*="col-lg-push-"]:before,
+  [class*="col-lg-offset-"]:before,
+  [class*="col-sm-pull-"]:before,
+  [class*="col-sm-push-"]:before,
+  [class*="col-sm-offset-"]:before,
+  [class*="col-xs-pull-"]:before,
+  [class*="col-xs-push-"]:before,
+  [class*="col-xs-offset-"]:before {
+    content: "";
+  }
+
+  @include debug-grid-cols("md", $color-md, $color-md-bg, $color-md-bg-iterate);
+
+  body:before {
+    content: "\00a0 medium screen / desktop (md) \00a0";
+    background-color: $color-md;
+  }
+
+  .clearfix.visible-md:after {
+    content: "\00a0 .clearfix .visible-md";
+    font-size: 10px;
+    font-style: italic;
+    color: $color-clearfix;
+    width: 100%;
+  }
+
+}
+
+// tablets
+@media (max-width: $screen-sm-max) {
+
+  [class*="col-lg-pull-"]:before,
+  [class*="col-lg-push-"]:before,
+  [class*="col-lg-offset-"]:before,
+  [class*="col-md-pull-"]:before,
+  [class*="col-md-push-"]:before,
+  [class*="col-md-offset-"]:before,
+  [class*="col-xs-pull-"]:before,
+  [class*="col-xs-push-"]:before,
+  [class*="col-xs-offset-"]:before {
+    content: "";
+  }
+
+  @include debug-grid-cols("sm", $color-sm, $color-sm-bg, $color-sm-bg-iterate);
+
+  body:before {
+    content: "\00a0 small screen / tablet (sm) \00a0";
+    background-color: $color-sm;
+  }
+
+  .clearfix.visible-sm:after {
+    content: "\00a0 .clearfix .visible-sm";
+    font-size: 10px;
+    font-style: italic;
+    color: $color-clearfix;
+    width: 100%;
+  }
+
+}
+
+// phones
+@media (max-width: $screen-xs-max) {
+
+  [class*="col-lg-pull-"]:before,
+  [class*="col-lg-push-"]:before,
+  [class*="col-lg-offset-"]:before,
+  [class*="col-md-pull-"]:before,
+  [class*="col-md-push-"]:before,
+  [class*="col-md-offset-"]:before,
+  [class*="col-sm-pull-"]:before,
+  [class*="col-sm-push-"]:before,
+  [class*="col-sm-offset-"]:before {
+    content: "";
+  }
+
+  @include debug-grid-cols("xs", $color-xs, $color-xs-bg, $color-xs-bg-iterate);
+
+  body:before {
+    content: "\00a0 extra small screen / phone (xs) \00a0";
+    background-color: $color-xs;
+  }
+
+  .clearfix.visible-xs:after {
+    content: "\00a0 .clearfix .visible-xs";
+    font-size: 10px;
+    font-style: italic;
+    color: $color-clearfix;
+    width: 100%;
+  }
+
+}
+
+.debug-grid {
+  position: fixed;
+  height: auto;
+  width: auto;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: -1;
+
+  .col-xs-1 {
+    height: 15000px;
+    outline: none;
+    background-color: rgba(204, 102, 0, 0.07);
+  }
+
+  .row .col-xs-1:nth-child(even) {
+    background-color: rgba(204, 102, 0, 0.02);
+  }
+
+  // scss-lint:disable ImportantRule
+  .col-xs-1:after { content: "" !important; }
+  // scss-lint:enable ImportantRule
+
+}

@@ -1,0 +1,37 @@
+<?php
+
+/**
+ * @file
+ * Theme functions overrides
+ */
+
+/**
+ * Implements hook_form_alter().
+ */
+function subtheme_child_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
+}
+
+/**
+ * Implements hook_js_alter().
+ */
+function subtheme_child_js_alter(&$javascript, \Drupal\Core\Asset\AttachedAssetsInterface $assets) {
+
+}
+
+/**
+ * Implements hook_css_alter().
+ */
+function subtheme_child_css_alter(&$css, \Drupal\Core\Asset\AttachedAssetsInterface $assets) {
+}
+
+/**
+ * Implements hook_page_attachments_alter().
+ */
+function subtheme_child_page_attachments_alter(&$attachments) {
+}
+
+/**
+ * Implements hook_html_head_alter()
+ */
+function subtheme_child_html_head_alter(&$head_elements) {
+}

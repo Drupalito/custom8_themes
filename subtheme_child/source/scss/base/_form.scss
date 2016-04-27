@@ -1,0 +1,673 @@
+// scss-lint:disable QualifyingElement
+
+form,
+fieldset,
+legend,
+button,
+input,
+select,
+textarea {
+  margin: 0;
+}
+
+legend,
+fieldset {
+  padding: 0;
+  border: 0;
+}
+
+// 1. Rétablit l'héritage de la propriété 'color'.
+//    @bugfix   affected IE 8/9.
+// 2. Permet au texte de revenir à la ligne du texte.
+//    @bugfix   affected  FF 3.6
+//    @see      http://stackoverflow.com/questions/6133571/how-can-i-make-legend-text-wrap
+//    @note     IE 6 et IE 7 nécessitent une solution de contournement alternative.
+// 3. Remove padding so people aren't caught out if they zero out fieldsets.
+legend {
+  white-space: normal; // 2
+}
+
+// 1. Correct font family not being inherited in all browsers.
+// 2. Correct font size not being inherited in all browsers.
+button,
+input,
+select,
+textarea {
+  vertical-align: baseline;
+  font-family: inherit; // 1
+  font-size: 100%; // 2
+}
+
+input,
+select,
+textarea {
+  outline: 0;
+  border: 1px solid #c0c0c0;
+  background: #fff;
+}
+
+// 1. Masque la barre de défilement présente par défaut. IE 7/8/9.
+// 2. Uniformise l'alignement vertical.
+textarea {
+  overflow: auto; // 1
+  vertical-align: top; // 2
+  resize: vertical;
+  font-family: inherit;
+  // width: 92%;
+  // &.resize-auto {
+  //   resize: auto;
+  // }
+}
+
+button,
+label {
+  cursor: pointer;
+}
+
+// 1. Address Firefox 4+ setting `line-height` on `input` using `!important` in
+//    the UA stylesheet.
+// 2. Re-set default cursor for disabled elements.
+button,
+input {
+  line-height: normal;
+}
+
+button[disabled],
+input[disabled],
+textarea[disabled],
+select[disabled] {
+  opacity: .5;
+  cursor: not-allowed; // 2
+  background-color: $form-disable;
+}
+
+input[type="text"],
+input[type="tel"],
+input[type="color"],
+input[type="number"],
+input[type="email"],
+input[type="password"],
+input[type="url"],
+input[type="submit"] {
+  display: inline-block;
+  padding: 0 5px;
+  line-height: normal;
+  height: $input-height;
+}
+
+input[type="text"],
+input[type="tel"],
+input[type="color"],
+input[type="number"],
+input[type="email"],
+input[type="password"],
+input[type="url"],
+select,
+textarea {
+  width: 100%;
+  transition: background-color .3s ease;
+
+  &:focus {
+    $color-focus: map-get($colorz, "primary");
+    box-shadow: 0 0 2px $color-focus, 0 0 5px $color-focus;
+  }
+}
+
+textarea,
+input[type="file"] {
+  padding: 6px;
+}
+
+input[type="file"] {
+  display: inline-block;
+  font-size: 80%;
+  line-height: 0;
+}
+
+input[type="submit"] {
+  padding: 0 10px;
+}
+
+// 1. Avoid the WebKit bug in Android 4.0.* where (2) destroys native `audio`
+//    and `video` controls.
+// 2. Correct inability to style clickable `input` types in iOS.
+// 3. Improve usability and consistency of cursor style between image-type
+//    `input` and others.
+button,
+html input[type="button"], // 1
+input[type="button"],
+input[type="reset"],
+input[type="submit"] {
+  cursor: pointer; // 3
+  -webkit-appearance: button; // 2
+}
+
+select {
+  width: auto;
+  padding: 0 30px 0 5px; /* LTR */
+  border-radius: 0;
+  text-indent: 0.01px;
+  text-overflow: ""; // ellipsis;
+  background: $form-background-color url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAFCAQAAADvCgS4AAAAGklEQVR4AWNg+I8BcQGCyhAAXRlhpcQAQsoAMGIY6KADYAUAAAAASUVORK5CYII=") no-repeat 100% center; /* LTR */
+  height: $input-height;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  -webkit-radius: none;
+}
+
+// IE Hack
+select::-ms-expand {
+  display: none;
+}
+
+// 1. Address `appearance` set to `searchfield` in Safari 5 and Chrome.
+// 2. Address `box-sizing` set to `border-box` in Safari 5 and Chrome
+//    (include `-moz` to future-proof).
+// 3. Removes inner padding and search cancel button in Safari 5 and Chrome on OS X.
+input[type="search"] {
+  // box-sizing: content-box; // 2
+  -webkit-appearance: textfield; // 1
+  &::-webkit-search-cancel-button,
+  &::-webkit-search-decoration {
+    -webkit-appearance: none; // 3
+  }
+}
+
+// Supprime les marges internes incompressibles.
+// @bugfix   Firefox4+
+// @see      http://www.sitepen.com/blog/2008/05/14/the-devils-in-the-details-fixing-dojos-toolbar-buttons/
+button::-moz-focus-inner,
+input::-moz-focus-inner {
+  padding: 0;
+  border: 0;
+}
+
+
+/*
+---
+title: Custom radio & Checkbox
+category: Base - Forms
+---
+
+*/
+input[type="radio"],
+input[type="checkbox"] {
+  display: none;
+
+  + label {
+    display: inline-block;
+    cursor: pointer;
+    position: relative;
+    padding-left: pem($base-line-height, 15px); /* LTR */
+
+    &:before {
+      content: "";
+      display: inline-block;
+      vertical-align: middle;
+      position: absolute;
+      left: 0;
+      top: 50%;
+      margin-top: -0.5em;
+      padding: 0;
+      width: 1em;
+      height: 1em;
+      outline: none;
+      border: 1px solid $form-border-color;
+      background: $form-background-color;
+      transition: background 0.5s ease;
+    }
+
+    &:hover:before,
+    &:focus:before {
+      cursor: pointer;
+      border-color: #{map-get($colorz, "primary")};
+    }
+  }
+
+  &:checked + label:before,
+  &:disabled:checked + label:before {
+    border-color: #{map-get($colorz, "primary")};
+    background: #{map-get($colorz, "primary")};
+    box-shadow: inset 0 0 0 3px #fff;
+  }
+
+  &:disabled + label:before,
+  &:disabled + label:before {
+    opacity: .5;
+    cursor: not-allowed;
+    border-color: $form-disable;
+    background-color: $form-disable;
+  }
+}
+
+input[type="radio"] + label:before {
+  border-radius: 50%;
+}
+
+/*doc
+---
+title: All inputs
+category: Base - Forms
+---
+
+```html_example
+
+  <form action="" id="formExample">
+    <div class="form-item">
+      <label for="name">Name</label>
+      <input id="name" name="name" type="text" />
+    </div>
+    <div class="form-item has--error">
+      <label for="email">Email</label>
+      <input class="field-txt error" id="email" name="email" type="email" />
+      <br /><small>Error 1 : Enter valid email address, eg toto@domaine.com.</small>
+    </div>
+    <div class="form-item">
+      <label for="password">Password</label>
+      <input name="password" type="password" value="Password" />
+    </div>
+    <div class="form-item">
+      <label for="url">Url</label>
+      <input id="url" name="url" type="url" />
+    </div>
+    <div class="form-item">
+      <label for="message">Textarea</label>
+      <textarea cols="30" id="message" name="message" rows="5"></textarea>
+    </div>
+    <div class="form-item">
+      <label for="message">Disabled textarea</label>
+      <textarea cols="30" id="message" name="message" rows="5" disabled="disabled"></textarea>
+    </div>
+    <div class="form-item">
+      <label for="file">File</label>
+      <input id="file" name="file" type="file" />
+    </div>
+    <div class="form-item">
+      <label for="select">Select</label>
+      <select id="select" name="select">
+        <option>1</option>
+        <option>2</option>
+        <option>3</option>
+        <option>4</option>
+      </select>
+    </div>
+    <div class="form-item">
+      <label for="select">Disabled select</label>
+      <select id="select" name="select" disabled="disabled">
+        <option>1</option>
+        <option>2</option>
+        <option>3</option>
+        <option>4</option>
+      </select>
+    </div>
+    <div class="form-item">
+      <div class="form-item">
+        <input id="radio_off" name="optionsRadios" type="radio" />
+        <label for="radio_off">Radio is off</label>
+        <br />
+        <input id="radio_on" name="optionsRadios" type="radio" checked="checked" />
+        <label for="radio_on">Radio is on</label>
+        <br />
+        <input id="radio_off_disabled" name="optionsRadiosDisabled" type="radio" disabled="disabled" />
+        <label class="text--muted" for="radio_off_disabled">Disabled radio is off</label>
+        <br />
+        <input id="radio_on_disabled" name="optionsRadiosDisabled" type="radio" checked="checked" disabled="disabled" />
+        <label class="text--muted" for="radio_on_disabled">Disabled radio is on</label>
+      </div>
+    </div>
+    <div class="form-item">
+      <div class="form-item">
+        <input id="checkbox_off" name="optionsCheckboxes" type="checkbox" />
+        <label for="checkbox_off">Checkbox is off</label>
+        <br />
+        <input id="checkbox_on" name="optionsCheckboxes" type="checkbox" checked="checked" />
+        <label for="checkbox_on">Checkbox is on</label>
+        <br />
+        <input id="checkbox_off_disabled" name="optionsCheckboxesDisabled" type="checkbox" disabled="disabled" />
+        <label class="text--muted" for="checkbox_off_disabled">Disabled checkbox is off</label>
+        <br />
+        <input id="checkbox_on_disabled" name="optionsCheckboxesDisabled" type="checkbox" checked="checked" disabled="disabled" />
+        <label class="text--muted" for="checkbox_on_disabled">Disabled checkbox is on</label>
+      </div>
+    </div>
+    <div class="form-item">
+      <button class="btn btn--primary" type="submit" name="submit">Send your message</button>
+      <button class="btn btn--cancel" type="submit" name="cancel">Cancel</button>
+    </div>
+  </form>
+
+```
+
+*/
+
+/*doc
+---
+title: Field required
+category: Base - Forms
+---
+
+[TODO]
+
+```html_example
+
+  <abbr class="field-required" title="This field is required.">*</abbr>
+
+```
+
+*/
+
+.field-required {
+  font-size: pem(12px);
+  line-height: 1.2;
+  color: #666;
+}
+
+/*doc
+---
+title: Field static
+category: Base - Forms
+---
+
+```html_example
+
+  <div class="form-item">
+    <span class="label">Email</span>
+    <strong>email@example.com</strong>
+  </div>
+  <div class="form-item">
+    <label for="password">Password</label>
+    <input name="password" type="text" placeholder="Password" />
+  </div>
+
+```
+
+*/
+
+.form-item {
+  @include form-item($input-height);
+}
+
+/*doc
+---
+title: Fieldset + Legend
+category: Base - Forms
+---
+
+Collapsed
+
+[TODO]
+
+*/
+
+fieldset {
+  border: 1px solid #ccc;
+  border-top: 3px solid #{map-get($colorz, "primary")};
+  padding: $base-line-height;
+  margin: 0 0 rhythm(1);
+
+  &.collapsed {
+    position: relative;
+    padding-bottom: 0;
+
+    a {
+      color: #{map-get($colorz, "primary")};
+    }
+
+    .fieldset-legend {
+      display: block;
+    }
+
+    html.js & {
+      border-bottom-width: 0;
+      border-left-width: 0;
+      border-right-width: 0;
+      height: 1em;
+
+      .fieldset-wrapper {
+        display: none;
+      }
+    }
+  }
+
+  &.collapsible {
+    position: relative;
+
+    .fieldset-legend {
+      display: block;
+    }
+  }
+
+  legend {
+    padding: 0 ($base-line-height / 2);
+    margin: 0;
+    margin-left: -(($base-line-height / 2) / 2); /* LTR */
+    font-size: pem(18px);
+    font-weight: 700;
+
+    a {
+      border-bottom: 0;
+    }
+  }
+}
+
+.fieldset-wrapper > .form-item:last-child {
+  margin-bottom: 0;
+}
+
+.fieldset-description {
+  padding-bottom: 1em;
+}
+
+/*doc
+---
+title: Field Inline
+category: Base - Forms
+---
+
+Add class `form-item--inline` on parent `div.form-item`
+
+```html_example
+
+  <div class="form-item form-item--inline">
+    <div class="form-item">
+      <label for="Login">Login</label>
+      <input name="Login" type="text" placeholder="Login" />
+    </div>
+    <div class="form-item">
+      <label for="password">Password</label>
+      <input name="password" type="text" placeholder="Password" />
+    </div>
+  </div>
+
+```
+
+*/
+
+.form-item--inline {
+  @include form-item-inlineblock;
+}
+
+/*doc
+---
+title: Action confirm
+category: Base - Forms
+---
+
+Drupal example HTML
+
+  <form action="" id="formConfirm">
+    <div><p>This action cannot be undone.</p>
+    <div class="form-actions form-wrapper">
+      <button name="op" value="Confirm" type="submit" class="btn btn--primary btn--submit form-submit">Confirm</button><a href="#" id="edit-cancel">Cancel</a></div>
+    </div>
+  </form>
+
+*/
+
+.form-actions {
+  margin-top: rhythm(1);
+
+  button + button {
+    margin-left: 2em; /* LTR */
+  }
+}
+
+// .form-radios,
+// .form-checkboxes,
+// .container-inline-date {
+//   .form-item {
+//     display: inline-block;
+//     margin-right: 10px;
+//   }
+// }
+
+// .form-item--date-day,
+// .form-item--date-month,
+// .form-item--date-year {
+//   display: inline-block;
+// }
+
+/*doc
+---
+title: Password Confirm
+category: Base - Forms
+---
+
+Drupal example HTML
+
+  <form action="" id="formPassword">
+    <div class="form-item form-type--password-confirm form-item--password-confirm">
+      <label for="edit-password-confirm">Password confirm </label>
+      <div class="form-item form-type--password form-item--password-confirm-pass1 password-parent"><div class="password-strength"><div class="password-strength-text" aria-live="assertive">Weak</div><div class="password-strength-title">Password strength:</div><div class="password-indicator"><div class="indicator" style="width: 0%;"></div></div></div>
+      <label for="edit-password-confirm-pass1">Password </label>
+      <input class="password-field form-text password-processed" type="password" id="edit-password-confirm-pass1" name="password_confirm[pass1]" size="60" maxlength="128">
+    </div>
+    <div class="form-item form-type--password form-item--password-confirm-pass2 confirm-parent">
+      <div class="password-confirm" style="visibility: hidden;">Passwords match: <span></span></div>
+        <label for="edit-password-confirm-pass2">Confirm password </label>
+        <input class="password-confirm form-text" type="password" id="edit-password-confirm-pass2" name="password_confirm[pass2]" size="60" maxlength="128">
+      </div>
+    </div>
+  </form>
+
+*/
+
+// scss-lint:disable MergeableSelector
+div.password-confirm,
+.password-strength {
+  @extend .pull-right; /* LTR */
+  line-height: $input-height;
+}
+
+div.password-confirm {
+  visibility: hidden;
+}
+
+.password-strength {
+  &-title {
+    display: inline-block;
+  }
+
+  &-text {
+    @extend .pull-right; /* LTR */
+    font-weight: 700;
+    font-style: normal;
+    margin-left: 5px; /* LTR */
+  }
+}
+
+.form-item.confirm-parent,
+.form-item .password-suggestions {
+  margin-top: rhythm(.5);
+}
+
+.form-item .password-suggestions {
+  padding: 10px 20px;
+  border: 1px solid #b4b4b4;
+}
+// scss-lint:enable MergeableSelector
+
+/*doc
+---
+title: Field states
+category: Base - Forms
+---
+
+  <form action="" id="formErrors">
+    <div class="form-item has--info">
+      <label for="email">Email <abbr class="field-required" title="This field is required.">*</abbr></label>
+      <input aria-labelledby="error_email" class="field-txt error" name="email" type="email" required="required" aria-required="true" />
+      <br /><small id="error_email"> Error 1 : Enter valid email address, eg toto@domaine.com.</small>
+    </div>
+    <div class="form-item has--warning">
+      <label for="email">Email <abbr class="field-required" title="This field is required.">*</abbr></label>
+      <input aria-labelledby="error_email" class="field-txt error" name="email" type="email" required="required" aria-required="true" />
+      <br /><small id="error_email"> Error 1 : Enter valid email address, eg toto@domaine.com.</small>
+    </div>
+    <div class="form-item has--error">
+      <label for="email">Email <abbr class="field-required" title="This field is required.">*</abbr></label>
+      <input aria-labelledby="error_email" class="field-txt error" name="email" type="email" required="required" aria-required="true" />
+      <br /><small id="error_email"> Error 1 : Enter valid email address, eg toto@domaine.com.</small>
+    </div>
+    <div class="form-item has--status">
+      <label for="email">Email <abbr class="field-required" title="This field is required.">*</abbr></label>
+      <input aria-labelledby="error_email" class="field-txt error" name="email" type="email" required="required" aria-required="true" />
+      <br /><small id="error_email"> Error 1 : Enter valid email address, eg toto@domaine.com.</small>
+    </div>
+  </form>
+
+*/
+
+@each $name, $values in $message {
+  $color: map-get($values, "background");
+
+  .has--#{$name} {
+    @extend .text--#{$name};
+  }
+
+  .has--#{$name} input,
+  .has--#{$name} select,
+  .has--#{$name} textarea {
+    border-left-width: 4px; /* LTR */
+    @if map-get($values, "color") {
+      border-color: map-get($values, "color");
+
+      &:focus {
+        $color-focus: map-get($values, "color");
+        box-shadow: 0 0 2px $color-focus, 0 0 5px $color-focus;
+      }
+    } @else {
+      border-color: $color;
+
+      &:focus {
+        box-shadow: 0 0 2px $color, 0 0 5px $color;
+      }
+    }
+  }
+}
+
+/*doc
+---
+title: Placeholder
+category: Base - Forms
+---
+
+Couleurs de placeholder : ne pas fusionner les sélecteurs !
+
+@see http://stackoverflow.com/a/2610741
+
+*/
+
+// scss-lint:disable VendorPrefix
+$field-placeholder: #999;
+::-webkit-input-placeholder { // WebKit browsers
+  color: $field-placeholder; }
+:-moz-placeholder { // Mozilla Firefox 4 to 18
+  color: $field-placeholder; }
+::-moz-placeholder { // Mozilla Firefox 19+
+  color: $field-placeholder; }
+:-ms-input-placeholder { // Internet Explorer 10+
+  color: $field-placeholder; }
+// scss-lint:enable VendorPrefix
+
+// scss-lint:enable QualifyingElement

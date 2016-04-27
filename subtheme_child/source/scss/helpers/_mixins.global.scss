@@ -1,0 +1,70 @@
+
+// Mixins Global
+// =============
+
+// Do not change these lines.
+$browser-default-font-size:   16px !default;
+$rhythm-unit:                 "em" !default;
+$relative-font-sizing:        true !default;
+$default-rhythm-border-style: solid !default;
+$font-unit: if($relative-font-sizing, 1em, $base-font-size);
+
+/// Media queries size
+/// @param {string} $keyword [smaller|small|medium|large] - Media queries name
+/// @example scss - Usage SCSS
+///   @include mq("smaller") { ... }
+///   @include mq("small") { ... }
+///   @include mq("medium") { ... }
+///   @include mq("large") { ... }
+@mixin mq($keyword) {
+  @if $keyword == smaller {
+    @media (max-width: $screen-sm-min) { @content; }
+  }
+  @if $keyword == small {
+    @media (min-width: $screen-sm-min) { @content; }
+  }
+  @if $keyword == medium {
+    @media (min-width: $screen-md-min) { @content; }
+  }
+  @if $keyword == large {
+    @media (min-width: $screen-lg-min) { @content; }
+  }
+}
+
+// establish-baseline
+@mixin establish-baseline(
+  $font-size: $base-font-size,
+  $font-family: map-get($font-families, "body")
+  ) {
+
+  $taille: ($font-size / $browser-default-font-size * 100%);
+  $line-height: rhythm(1, $font-size);
+
+  // scss-lint:disable VendorPrefix
+  html {
+    font: #{$taille}/#{$line-height} $font-family;
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
+  }
+  // scss-lint:enable VendorPrefix
+}
+
+// Calculate rhythm units
+@function rhythm($lines: 1, $font-size: $base-font-size) {
+  $rhythm: $font-unit * $lines * $base-line-height / $font-size;
+  @return $rhythm;
+}
+
+@function lines-for-font-size($font-size) {
+  $lines: ceil($font-size / $base-line-height);
+  @if $lines * $base-line-height - $font-size < 1 {
+    $lines: $lines + 1;
+  }
+  @return $lines;
+}
+
+@mixin font-size($taille: $base-font-size) {
+  font-size: $font-unit * $taille / $base-font-size;
+  line-height: rhythm(lines-for-font-size($taille), if($relative-font-sizing, $taille, $base-font-size));
+}

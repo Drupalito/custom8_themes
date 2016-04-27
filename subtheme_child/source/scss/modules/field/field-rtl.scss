@@ -1,0 +1,23 @@
+
+// Import Variables / Helpers
+@import "../../import";
+
+/*doc
+---
+title: Field
+category: Module - Field
+---
+
+Default Style CSS
+
+*/
+
+.field {
+  &--label-inline {
+    .field-label {
+      margin-left: rhythm(.5);
+      margin-right: 0;
+      float: right;
+    }
+  }
+}

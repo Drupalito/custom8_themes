@@ -1,0 +1,183 @@
+
+/*doc
+---
+title: Button
+category: Components - Buttons
+---
+
+Vous pouvez utiliser `.btn`.
+Pour une action, préférer un `<button>` à un lien `<a>`
+
+```html_example
+
+  <button class="btn">Submit</button>
+  <input id="submit" name="submit" class="btn" type="submit" value="Submit" />
+  <span class="btn">Submit</span>
+  <a href="#" class="btn">Submit</a>
+
+```
+
+*/
+
+.btn {
+  @extend .inbl;
+  @extend .amiddle;
+  @include bold;
+  position: relative;
+  overflow: visible;
+  padding: rhythm(.5) rhythm(1);
+  margin: 0;
+  border: 0;
+  text-decoration: none;
+  text-align: center;
+  font-size: 1em;
+  font-family: sans-serif;
+  line-height: normal;
+  background-clip: padding-box;
+  background-color: #eee;
+  color: #333;
+  white-space: nowrap;
+  cursor: pointer;
+  outline: none;
+  transition-timing-function: ease-in;
+  transition-property: background-color;
+  transition-duration: .250s;
+  appearance: none;
+
+  &:hover,
+  &:focus,
+  &:active,
+  &.active {
+    text-decoration: none;
+    background-color: #ccc;
+    color: #fff;
+  }
+
+  // Kill phantom spacing and dotted
+  // border that appears in Firefox.
+  &::-moz-focus-inner {
+    padding: 0;
+    border: 0;
+  }
+}
+
+/*doc
+---
+title: Buttons Colorz
+category: Components - Buttons
+---
+
+Couleurs disponibles.
+
+* `.btn` - Bouton de base
+* `.btn--default` - Couleur défault
+* `.btn--primary` - Couleur primaire
+* `.btn--secondary` - Couleur secondaire
+
+  <button class="btn">btn</button>
+  <input id="submit" name="submit" class="btn" type="submit" value="btn" />
+  <span class="btn">btn</span>
+  <a href="#" class="btn">btn</a>
+  <br />
+
+  <button class="btn btn--default">btn--default</button>
+  <input id="submit" name="submit" class="btn btn--default" type="submit" value="btn--default" />
+  <span class="btn btn--default">btn--default</span>
+  <a href="#" class="btn btn--default">btn--default</a>
+  <br />
+
+  <button class="btn btn--primary">btn--primary</button>
+  <input id="submit" name="submit" class="btn btn--primary" type="submit" value="btn--primary" />
+  <span class="btn btn--primary">btn--primary</span>
+  <a href="#" class="btn btn--primary">btn--primary</a>
+  <br />
+
+  <button class="btn btn--secondary">btn--secondary</button>
+  <input id="submit" name="submit" class="btn btn--secondary" type="submit" value="btn--secondary" />
+  <span class="btn btn--secondary">btn--secondary</span>
+  <a href="#" class="btn btn--secondary">btn--secondary</a>
+
+*/
+
+@each $name, $color in $colorz {
+  .btn--#{$name} {
+    @include btn-theme(#fff, $color);
+  }
+}
+
+
+.btn--edit-submit {
+  $background: map-get($colorz, "primary");
+  @include btn-theme(#fff, $background);
+}
+
+.btn--edit-add {
+  $type: map-get($message, "status");
+  $background: map-get($type, "color");
+  @include btn-theme(#fff, $background);
+}
+
+.btn--edit-preview {
+  $type: map-get($message, "info");
+  $background: map-get($type, "color");
+  @include btn-theme(#fff, $background);
+}
+
+.btn--edit-delete {
+  $type: map-get($message, "error");
+  $background: map-get($type, "color");
+  @include btn-theme(#fff, $background);
+}
+
+/*doc
+---
+title: Button actif
+category: Components - Buttons
+---
+
+* `.btn--active` - Bouton état actif
+
+```html_example
+
+  <button class="btn active">Submit</button>
+  <input id="submit" name="submit" class="btn active" type="submit" value="Submit" />
+  <span class="btn active">Submit</span>
+  <a href="#" class="btn active">Submit</a>
+
+```
+
+*/
+
+/*doc
+---
+title: Button désactivé
+category: Components - Buttons
+---
+
+* `.btn--disabled` - Bouton désactivé
+
+```html_example
+
+  <button class="btn btn--disabled">Submit</button>
+  <input id="submit" name="submit" class="btn btn--disabled" type="submit" value="Submit" />
+  <span class="btn btn--disabled">Submit</span>
+  <a href="#" class="btn btn--disabled">Submit</a>
+
+```
+
+*/
+
+.btn[disabled],
+.btn--disabled {
+  opacity: .65;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+// scss-lint:disable IdSelector
+.btn--submit + #edit-cancel {
+  display: inline-block;
+  margin-left: 20px; /* LTR */
+  margin-top: 20px;
+}
+// scss-lint:enable IdSelector

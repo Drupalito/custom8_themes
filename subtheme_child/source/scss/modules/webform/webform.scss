@@ -1,0 +1,182 @@
+
+// Import Variables / Helpers
+@import "../../import";
+
+/*doc
+---
+title: Webform
+category: Module - Webform
+---
+
+Default Style CSS
+
+```html_example
+
+  <div class="webform-progressbar">
+    <ul class="list-none mvn">
+      <li class="webform-progressbar__item current completed" style="width: 25%"><span class="webform-progressbar__label">Start</span></li>
+      <li class="webform-progressbar__item current" style="width: 25%"><span class="webform-progressbar__label">BREAK</span></li>
+      <li class="webform-progressbar__item" style="width: 25%"><span class="webform-progressbar__label">Test</span></li>
+      <li class="webform-progressbar__item" style="width: 25%"><span class="webform-progressbar__label">Complete</span></li>
+    </ul>
+    <div class="webform-progressbar-number">
+      <p class="bold">Page 2 of 4 <small class="webform-progressbar-percent">(33%)</small></p>
+    </div>
+  </div>
+
+```
+*/
+
+.form-item.webform-container-inline {
+  @include form-item-inline($input-height);
+}
+
+.webform-progressbar {
+  margin: rhythm(1) 0;
+
+  &-number {
+    margin: rhythm(.5) 0;
+    text-align: center;
+  }
+
+  ul {
+    // overflow: hidden;
+    counter-reset: step;
+  }
+
+  li {
+    list-style: none;
+    text-transform: uppercase;
+    position: relative;
+
+    &:before {
+      content: counter(step);
+      counter-increment: step;
+      display: inline-block;
+      width: 20px;
+      line-height: 20px;
+      text-align: center;
+      border-radius: 3px;
+      font-size: 80%;
+    }
+
+    &:first-child:after {
+      content: none;
+    }
+
+    &:after {
+      content: "";
+      width: 100%;
+      height: 2px;
+      position: absolute;
+      top: 9px;
+      left: -50%;
+      z-index: -1;
+    }
+
+    &:before,
+    &:after {
+      background: #fff;
+      color: #333;
+    }
+
+    &.step {
+      color: #{map-get($colorz, "default")};
+
+      &:before,
+      &:after {
+        background: #{map-get($colorz, "default")};
+        color: #fff;
+      }
+    }
+
+    &.current {
+      @include bold;
+      &:before {
+        margin-top: -3px;
+        width: 2em;
+        height: 2em;
+        line-height: 2;
+      }
+    }
+  }
+
+  @media (max-width: $screen-sm-min) {
+    li {
+      width: 100%;
+      border-top: 1px solid #ccc;
+      padding-top: 5px;
+      margin-top: 5px;
+
+      &:first-child {
+        border-top: 0;
+      }
+
+      &:before {
+        margin-right: .5em;
+      }
+
+      &:after {
+        display: none;
+      }
+    }
+  }
+
+  @media (min-width: $screen-sm-min) {
+    li {
+      float: left;
+      text-align: center;
+
+      &:before {
+        display: block;
+        margin: 0 auto 5px;
+      }
+    }
+  }
+}
+
+/* */
+
+.webform-confirmation {
+  padding: 1.5em;
+  border: 1px solid #ccc;
+}
+
+/* */
+
+.webform-container-inline {
+  > div,
+  > .form-item {
+    display: inline-block;
+  }
+
+  // scss-lint:disable ImportantRule
+  .description { display: block; }
+  // scss-lint:enable ImportantRule
+
+  // scss-lint:disable QualifyingElement
+  div.ajax-progress-bar div { display: inherit; }
+  // scss-lint:enable QualifyingElement
+}
+
+/* */
+
+.webform-next,
+.webform-previous + button {
+  float: right;
+}
+
+.webform-previous {
+  $background: map-get($colorz, "secondary");
+  @include btn-theme(#fff, $background);
+}
+
+.webform-next {
+  $background: map-get($colorz, "default");
+  @include btn-theme(#fff, $background);
+}
+
+.webform-submit {
+  $background: map-get($colorz, "primary");
+  @include btn-theme(#fff, $background);
+}

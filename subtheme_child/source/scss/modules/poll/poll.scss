@@ -1,0 +1,66 @@
+
+// Import Variables / Helpers
+@import "../../import";
+
+/*doc
+---
+title: Poll
+category: Module - Poll
+---
+
+Default Style CSS
+
+```html_example
+
+  <div class="poll-results">
+    <div class="poll-bars">
+      <div class="poll-bars__text"><sapn class="bold">France</sapn> - <small class="poll-bars__percent">50% (3 votes)</small></div>
+      <div class="poll-bars__bar">
+        <div style="width: 50%;" class="foreground"></div>
+      </div>
+    </div>
+    <div class="poll-bars">
+      <div class="poll-bars__text"><sapn class="bold">Espagne</sapn> - <small class="poll-bars__percent">0% (1 vote)</small></div>
+      <div class="poll-bars__bar">
+        <div style="width: 5%;" class="foreground"></div>
+      </div>
+    </div>
+    <div class="poll-bars">
+      <div class="poll-bars__text"><sapn class="bold">Italie</sapn> - <small class="poll-bars__percent">50% (10 votes)</small></div>
+      <div class="poll-bars__bar">
+        <div style="width: 70%;" class="foreground"></div>
+      </div>
+    </div>
+    <div class="poll-results__total mtl">
+      <p class="bold">Total votes&nbsp;: 2</p>
+    </div>
+  </div>
+
+```
+
+*/
+
+.poll {
+  &-bars__bar,
+  &-results {
+    border: 1px solid #ccc;
+    background: #fff;
+  }
+
+  &-bars {
+    margin-top: rhythm(1);
+
+    &:first-child {
+      margin-top: 0;
+    }
+
+    .foreground {
+      height: 1em;
+      background: #{map-get($colorz, "default")};
+    }
+  }
+
+  &-results {
+    padding: 1.5em;
+  }
+}

@@ -1,0 +1,136 @@
+
+// Import Variables / Helpers
+@import "import";
+
+/**
+ * subtheme_child Drupal Theme
+ * Print stylesheet
+ * Black prints faster: h5bp.com/s
+ *
+ * Ajouter ce fichier à votre page pour appliquer
+ * les CSS d'impression.
+ *
+ * OWNER_NAME <OWNER_EMAIL>
+ * (CURRENT_YEAR)
+ */
+
+// scss-lint:disable ImportantRule QualifyingElement
+
+* {
+  background: transparent !important;
+  color: #000 !important;
+  box-shadow: none !important;
+  text-shadow: none !important;
+  text-rendering: optimizeLegibility;
+}
+
+// Supprimer les éventuelles marges et largeur de <body>.
+// Initialiser la taille de police en points.
+body {
+  font-family: serif;
+  font-size: 12pt;
+  background: #fff !important;
+  color: #333 !important;
+}
+
+body,
+.container {
+  margin: 0 !important;
+  padding: 0 !important;
+  width: auto !important;
+}
+
+// scss-lint:disable SingleLinePerSelector
+h1, .h1,
+h2, .h2,
+h3, .h3,
+h4, .h4,
+h5, .h5,
+h6, .h6 {
+  font-family: #{map-get($font-families, "print")};
+  page-break-after: avoid;
+}
+
+h1, .h1,
+h2, .h2,
+h3, .h3,
+h4, .h4,
+h5, .h5,
+h6, .h6,
+blockquote,
+code,
+pre,
+tr,
+img {
+  page-break-inside: avoid;
+}
+// scss-lint:enable SingleLinePerSelector
+
+a {
+  &,
+  &:visited {
+    text-decoration: underline; // Souligner les liens
+  }
+
+  &[href]:after {
+    content: " (" attr(href) ")"; // Affiche les liens
+  }
+
+  // scss-lint:disable SelectorFormat
+  &.logo__link:after,
+  &[href^="#"]:after,
+  &[href^="javascript:"]:after {
+    content: ""; // Don't show links for images, or javascript/internal links
+  }
+  // scss-lint:enable SelectorFormat
+
+  ul &[href]:after,
+  ol &[href]:after {
+    content: "";
+  }
+}
+
+// Afficher la signification des abréviations
+abbr[title]:after,
+dfn[title]:after {
+  content: " (" attr(title) ")";
+}
+
+p,
+blockquote {
+  orphans: 3;
+  widows: 3;
+}
+
+// Restreindre la largeur de l’image à celle de son conteneur
+img {
+  max-width: 100% !important;
+}
+
+pre,
+blockquote {
+  border: 1px solid #999;
+}
+
+thead {
+  display: table-header-group;
+}
+
+.noprint,
+.contentinfo,
+.aside,
+.skiplinks,
+.pagination,
+.message {
+  display: none;
+}
+
+.alignleft,
+.alignright,
+.alignone {
+  float: none;
+  display: block;
+  margin-bottom: 1.5em;
+}
+
+// scss-lint:enable ImportantRule QualifyingElement

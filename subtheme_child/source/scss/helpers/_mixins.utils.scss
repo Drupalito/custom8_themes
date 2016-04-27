@@ -1,0 +1,86 @@
+
+// Mixins utils
+// =============
+
+/// Responsive visibility
+/// @param {String} $parent - class name
+/// @see responsive-invisibility
+/// @example scss - Usage SCSS
+///   div {
+///     @include responsive-visibility("visible-xs")
+///   }
+@mixin responsive-visibility($parent) {
+  // scss-lint:disable ImportantRule
+  #{$parent} { display: block !important; }
+  // scss-lint:enable ImportantRule
+}
+
+/// Responsive invisibility
+/// @param {String} $parent - class name
+/// @see responsive-visibility
+/// @example scss - Usage SCSS
+///   div {
+///     @include responsive-invisibility("hidden-xs")
+///   }
+@mixin responsive-invisibility($parent) {
+  // scss-lint:disable ImportantRule
+  #{$parent} { display: none !important; }
+  // scss-lint:enable ImportantRule
+}
+
+/// Inline-block
+/// @param $alignment [top|middle|bottom] - Vertiale alignment
+/// @example scss - Usage SCSS
+///   .foo {
+///     @include inline-block("middle");
+///   }
+///
+///   .bar {
+///     @include inline-block("top");
+///   }
+/// @example css - Result CSS
+///   .foo {
+///     display: inline-block;
+///     vertical-align: top;
+///   }
+@mixin inline-block(
+  $alignment: top
+  ) {
+
+  display: inline-block;
+  @if $alignment and $alignment != none {
+    vertical-align: $alignment;
+  }
+}
+
+/// Position declarations.
+/// @param {String} $type - `relative`, `absolute` or `fixed`
+/// @param {Length} $left [null] - Left offset
+/// @param {Length} $right [null] - Right offset
+/// @param {Length} $top [null] - Top offset
+/// @param {Length} $bottom [null] - Bottom offset
+/// @example scss - Usage SCSS
+///   .foo {
+///     @include position(fixed, $top: 0, $right: 0, $keft: 0);
+///   }
+/// @example css - Result CSS
+///   .foo {
+///     position: fixed;
+///     top: 0;
+///     right: 0;
+///     left: 0;
+///   }
+@mixin position(
+  $type,
+  $top: null,
+  $right: null,
+  $bottom: null,
+  $left: null
+  ) {
+
+  position: $type;
+  top: $top;
+  right: $right;
+  bottom: $bottom;
+  left: $left;
+}

@@ -1,0 +1,90 @@
+
+// Import Variables / Helpers
+@import "../../import";
+
+/*doc
+---
+title: Comment
+category: Module - Comment
+---
+
+Default Style CSS
+
+```html_example
+
+  <div class="comment" id="comment">
+    <div>
+      <div class="comment__header">
+        <p class="mvn">
+          <span class="mrm"><span class="user-picture"><a href="#"><img src="http://placehold.it/85" width="85" height="85" /></a></span></span>
+          <span class="inbl amiddle"><cite itemprop="creator name"><span class="bold"><a href="#" class="username">admin12</a></span></cite><br /><time class="small" datetime="2016-02-27T20:37:49+01:00" itemprop="commentTime">Sat, 02/27/2016 - 20:37</time></span>
+        </p>
+      </div>
+      <div class="comment__description">
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Distinctio mollitia, doloremque natus architecto error in amet. Atque quam iste officia laboriosam, provident aliquam, deserunt, quibusdam nesciunt sit maxime, qui suscipit.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+```
+
+*/
+
+.comments--article,
+.comment-form .node {
+  margin-top: rhythm(1);
+  padding-top: rhythm(1);
+  border-top: pem(1px) solid #ccc;
+}
+
+.comment,
+.comments-add {
+  padding: rhythm(1);
+  margin-top: rhythm(1);
+  background: #f5f5f5;
+}
+
+.comments-submit {
+  margin-bottom: rhythm(1);
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.comment {
+  border: 2px solid #fff;
+
+  &__header {
+    border-bottom: pem(1px) solid #ccc;
+    padding-bottom: rhythm(0.5);
+    margin-bottom: rhythm(0.5);
+  }
+
+  &__signature,
+  .links {
+    border-top: pem(1px) solid #ccc;
+    padding-top: rhythm(0.5);
+    margin-top: rhythm(0.5);
+    margin-bottom: 0;
+  }
+
+  &--unpublished {
+    $type: map-get($message, "warning");
+    $background: map-get($type, "color");
+    background: #{lighten($background, 45%)};
+  }
+
+  &--preview {
+    $type: map-get($message, "info");
+    $background: map-get($type, "color");
+    background: #{lighten($background, 45%)};
+    padding: 1.5em;
+    margin-bottom: 1.5em;
+  }
+}
+
+.indented {
+  padding-left: 2em;
+}

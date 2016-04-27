@@ -1,0 +1,85 @@
+
+/*doc
+---
+title: Page
+category: Layout - Layer
+---
+
+```html_example
+
+  <div id="page" class="page">
+    ... header
+    ... navigation
+    <div id="container" class="container clearfix">
+      ... aside left
+      <div id="content" class="content">
+        <main id="main" class="main" role="main">
+          ...
+        </main>
+      </div>
+      ... aside right
+    </div>
+    ... footer
+  </div>
+
+```
+
+*/
+
+.content,
+.main,
+.node,
+.block {
+  position: relative;
+}
+
+// scss-lint:disable IdSelector
+.banner,
+#container,
+.contentinfo {
+  padding-top: rhythm(1);
+  padding-bottom: rhythm(1);
+}
+// scss-lint:enable IdSelector
+
+/*doc
+---
+title: Main header
+category: Layout - Layer
+---
+
+```html_example
+
+  <main id="main" class="main" role="main">
+    <div class="main__header">
+      <h1 class="main__title">Lorem ipsum dolor sit</h1>
+      <ul class="tabs tabs--user">
+        <li class="active"><a href="#" class="active">View<span class="element-invisible">(active tab)</span></a></li>
+        <li><a href="#">Profil</a></li>
+        <li><a href="#">Contact</a></li>
+      </ul>
+    </div>
+  </main>
+
+```
+
+*/
+
+.main {
+  &__title {
+    text-transform: uppercase;
+    margin-bottom: 0;
+
+    + * {
+      margin-top: 0;
+    }
+  }
+
+  &__header {
+    margin-bottom: rhythm(1);
+    padding-top: rhythm(0.5);
+    padding-bottom: rhythm(0.5);
+    border-top: pem(1px) solid #ccc;
+    border-bottom: pem(1px) solid #ccc;
+  }
+}
