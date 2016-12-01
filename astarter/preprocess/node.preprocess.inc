@@ -62,14 +62,6 @@ function astarter_preprocess_node(&$variables, $hook) {
     );
   }
 
-  // Clean link 'add comment'.
-  if (isset($variables['content']['links']['comment']['#links']['comment-add'])) {
-    $variables['content']['links']['comment']['#links']['comment-add']['attributes']['class'][] = 'node__link--comments';
-    $variables['content']['links']['comment']['#links']['comment-add']['attributes']['class'][] = 'scroll';
-    $variables['content']['links']['comment']['#links']['comment-add']['fragment'] = 'commentsAdd';
-    $variables['content']['links']['comment']['#links']['comment-add']['attributes']['title'] = $variables['content']['links']['comment']['#links']['comment-add']['title'] . ' ' . t('on') . ' ' .  $variables['title'];
-  }
-
   if ($css_view_mode == 'teaser') {
 
     // Teaser : clean link 'number comments'.

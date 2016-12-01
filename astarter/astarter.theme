@@ -25,6 +25,7 @@ function astarter_preprocess_page_title(&$variables) {
   // if (isset($node) && $node->bundle() == 'article') {
   //   $variables['title_attributes']['itemprop'][] = 'name';
   // }
+
 }
 
 /**
@@ -36,11 +37,23 @@ function astarter_preprocess_page(&$variables) {
   // Current path.
   $path = \Drupal::routeMatch()->getRouteName();
 
+  $variables['main_prefix']['#children'] = '';
+  $variables['main_suffix']['#children'] = '';
+
   // Remove sidebar when specific path.
   if (preg_match("/(user|system.404)/i", $path) || $variables['is_front']) {
     unset($variables['page']['sidebar_first']);
     unset($variables['page']['sidebar_second']);
   }
+
+  // For futur
+  // If is page node article.
+  // if (isset($variables['node']) && $variables['node']->bundle() == 'article') {
+  //   // Add div on first.
+  //   $variables['main_prefix']['#children'] = '<div itemscope itemtype="http://schema.org/BlogPosting">';
+  //   // Close div on end.
+  //   $variables['main_suffix']['#children'] = '</div>';
+  // }
 }
 
 /**
@@ -71,9 +84,9 @@ function astarter_preprocess_block(&$variables) {
 function astarter_preprocess_node(&$variables) {
   if ($variables['teaser']) {
     // Teaser : remove add comment link.
-    if (isset($variables['content']['links']['comment']['#links']['comment-add'])) {
-      unset($variables['content']['links']['comment-add']);
-    }
+    // if (isset($variables['content']['links']['comment']['#links']['comment-add'])) {
+    //   unset($variables['content']['links']['comment-add']);
+    // }
   }
 }
 
@@ -84,10 +97,19 @@ function astarter_preprocess_node(&$variables) {
  */
 function astarter_preprocess_links(&$variables) {
 
-  $variables['links']['node-readmore']['link']['#options']['attributes']['class'][] = 'node__link--readmore';
-  $variables['links']['node-readmore']['link']['#options']['attributes']['rel'] = 'bookmark';
+  if (isset($variables['links']['node-readmore'])) {
+    $variables['links']['node-readmore']['link']['#options']['attributes']['class'][] = 'node__link--readmore';
+    $variables['links']['node-readmore']['link']['#options']['attributes']['rel'] = 'bookmark';
+  }
 
-  $variables['links']['comment-add']['link']['#options']['attributes']['class'][] = 'node__link--comment-add';
+  // Clean link 'add comment'.
+  if (isset($variables['links']['comment-add'])) {
+    $variables['links']['comment-add']['link']['#options']['attributes']['class'][] = 'node__link--comment';
+    $variables['links']['comment-add']['link']['#options']['attributes']['class'][] = 'node__link--comment-add';
+    $variables['links']['comment-add']['link']['#options']['attributes']['class'][] = 'scroll';
+    // $variables['links']['comment-add']['link']['#options']['fragment'] = 'commentsAdd';
+    // $variables['links']['comment-add']['link']['#options']['attributes']['title'] = $variables['links']['comment-add']['link']['#title'];
+  }
 }
 
 /**

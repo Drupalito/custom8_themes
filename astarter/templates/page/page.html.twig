@@ -54,7 +54,7 @@
           </div>
         {% endif %}
 
-        {# Content #}
+        {# Content columns #}
         {%
           set content_classes = [
             page.sidebar_first and page.sidebar_second ? 'col-xs-12 col-sm-4',
@@ -72,10 +72,12 @@
           {% endif %}
 
           <main id="main" class="main" role="main">
-            {# Content #}
-            {% if page.content %}
-              {{ page.content }}
-            {% endif %}
+            {{ main_prefix }}
+              {# Content #}
+              {% if page.content %}
+                {{ page.content }}
+              {% endif %}
+            {{ main_suffix }}
           </main>
         </div>
 
