@@ -1,13 +1,184 @@
-
-global-styling:
-  version: 1
+# These lines define the STARTERKIT/base library.
+base:
   css:
-    theme:
-      css/screen.css: {}
-      css/screen-theme.css: {}
-      css/print.css: { media: print }
-  js:
-    js/main.js: {}
+    # The SMACSS category, "base", is loaded before other categories. Drupal 8
+    # loads stylesheets based on the SMACSS ordering of:
+    # base, layout, component, state, theme
+    base:
+      # The {} brackets allow you to specify the additional options, weight and
+      # media. For example, you can specify this is a print media stylesheet by
+      # specifying: { media: print } Note: this isn't recommended since
+      # separate print stylesheets is bad for front-end performance.
+      css/base.css: {}
+  # If this library had JavaScript you could specify it like this:
+  # js:
+  #   js/script.js: {}
   dependencies:
-    - core/jquery
-    - core/drupal
+    - STARTERKIT/clearfix
+    - STARTERKIT/visually-hidden
+
+layouts:
+  css:
+    # The SMACSS category, "layout", is loaded after "base" styles.
+    layout:
+      css/layouts.css: {}
+
+autocomplete:
+  css:
+    component:
+      css/autocomplete.css: {}
+
+breadcrumb:
+  css:
+    component:
+      css/breadcrumb.css: {}
+  dependencies:
+    - STARTERKIT/visually-hidden
+
+box:
+  css:
+    component:
+      css/box.css: {}
+
+clearfix:
+  css:
+    component:
+      css/clearfix.css: {}
+
+collapsible-fieldset:
+  css:
+    component:
+      css/collapsible-fieldset.css: {}
+
+comment:
+  css:
+    component:
+      css/comment.css: {}
+
+footer:
+  css:
+    component:
+      css/footer.css: {}
+
+form-item:
+  css:
+    component:
+      css/form-item.css: {}
+
+form-table:
+  css:
+    component:
+      css/form-table.css: {}
+
+header:
+  css:
+    component:
+      css/header.css: {}
+  dependencies:
+    - STARTERKIT/clearfix
+
+hidden:
+  css:
+    component:
+      css/hidden.css: {}
+
+highlight-mark:
+  css:
+    component:
+      css/highlight-mark.css: {}
+
+inline-links:
+  css:
+    component:
+      css/inline-links.css: {}
+
+inline-sibling:
+  css:
+    component:
+      css/inline-sibling.css: {}
+
+messages:
+  css:
+    component:
+      css/messages.css: {}
+
+more-link:
+  css:
+    component:
+      css/more-link.css: {}
+
+nav-menu:
+  css:
+    component:
+      css/nav-menu.css: {}
+
+navbar:
+  css:
+    component:
+      css/navbar.css: {}
+  dependencies:
+    - STARTERKIT/clearfix
+    - STARTERKIT/visually-hidden
+
+pager:
+  css:
+    component:
+      css/pager.css: {}
+
+print-none:
+  css:
+    component:
+      css/print-none.css: {}
+
+progress-bar:
+  css:
+    component:
+      css/progress-bar.css: {}
+
+progress-throbber:
+  css:
+    component:
+      css/progress-throbber.css: {}
+
+resizable-textarea:
+  css:
+    component:
+      css/resizable-textarea.css: {}
+
+responsive-video:
+  css:
+    component:
+      css/responsive-video.css: {}
+
+skip-link:
+  css:
+    component:
+      css/skip-link.css: {}
+
+table-drag:
+  css:
+    component:
+      css/table-drag.css: {}
+
+tabs:
+  css:
+    component:
+      css/tabs.css: {}
+  dependencies:
+    - STARTERKIT/clearfix
+    - STARTERKIT/visually-hidden
+
+visually-hidden:
+  css:
+    component:
+      css/visually-hidden.css: {}
+
+watermark:
+  css:
+    component:
+      css/watermark.css: {}
+
+wireframe:
+  css:
+    component:
+      css/wireframe.css: {}

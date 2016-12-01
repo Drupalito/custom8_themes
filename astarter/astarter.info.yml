@@ -4,8 +4,7 @@ type: theme
 base theme: classy
 description: Theme created by <a href="http://aquelito.fr">aQuelito</a>.<br />Please see the included README or our <a href="http://aquelito.fr">support</a>.
 core: 8.x
-libraries-override:
-  classy/base: false
+
 regions:
   header: 'Banner (Header)'
   branding: 'Branding (Header)'
@@ -19,3 +18,66 @@ regions:
   footer: 'Contentinfo (Footer)'
   page_top: 'Page Top'
   page_bottom: 'Page Bottom'
+
+# This section controls the libraries for your theme. For full documentation,
+# see https://www.drupal.org/node/2216195
+
+# The "libraries-override:" section will allow you to:
+# - Replace an entire library.
+# - Remove an entire library.
+# - Replace an asset in a library with another asset.
+# - Remove an asset from a library.
+libraries-override:
+  core/normalize: false
+  system/base:
+    css:
+      component:
+        css/components/clearfix.module.css: false
+        css/components/container-inline.module.css: false
+
+  classy/base:
+    css:
+      component:
+        css/components/breadcrumb.css: false
+        css/components/button.css: false
+        css/components/more-link.css: false
+        css/components/pager.css: false
+        css/components/tabs.css: false
+
+# The "libraries-extend:" section will allow you to add your own JS or CSS to
+# existing libraries.
+# libraries-extend:
+
+# The "libraries:" section will add a library to _all_ pages.
+libraries:
+  - astarter/base
+  # @TODO Remove these libraries and use attach_library() for all component styles.
+  - astarter/box
+  - astarter/comment
+  - astarter/header
+  - astarter/hidden
+  - astarter/inline-links
+  - astarter/inline-sibling
+  - astarter/print-none
+  - astarter/responsive-video
+  - astarter/wireframe
+  - astarter/autocomplete
+  - astarter/collapsible-fieldset
+  - astarter/form-item
+  - astarter/form-table
+  - astarter/progress-bar
+  - astarter/progress-throbber
+  - astarter/resizable-textarea
+  - astarter/table-drag
+  - astarter/nav-menu
+  - astarter/navbar
+  - astarter/pager
+
+
+# This section is used by the contrib module, Component Libraries. It allows you
+# to reference .twig files in your sass/ directory by using the Twig namespace:
+# @astarter
+component-libraries:
+  astarter:
+    paths:
+      - css
