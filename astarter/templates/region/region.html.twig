@@ -16,7 +16,7 @@
   set classes = [
     region != 'branding' ? 'region',
     region != 'branding' ? 'region--' ~ region|clean_class,
-    region == 'branding' ? 'branding'
+    region == 'branding' ? 'branding__inner'
   ]
 %}
 {% if content %}

@@ -55,7 +55,7 @@
  *   'parent_author' and 'parent_created' during template_preprocess_comment().
  *   This information is presented to help screen readers follow lengthy
  *   discussion threads. You can hide this from sighted users using the class
- *   visually-hidden.
+ *   a11y.
  *
  * These two variables are provided for context:
  * - comment: Full comment object.
@@ -95,7 +95,7 @@
           // reader without this information.
         #}
         {% if parent %}
-          <span class="visually-hidden">{{ parent }}</span>
+          <span class="a11y">{{ parent }}</span>
         {% endif %}
       </p>
     </div>

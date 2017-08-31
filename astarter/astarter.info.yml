@@ -3,7 +3,7 @@ core: 8.x
 name: astarter
 type: theme
 base theme: classy
-description: Theme created by <a href="http://aquelito.fr">aQuelito</a>.<br />Please see the included README or our <a href="http://aquelito.fr">support</a>.
+description: Theme created by <a href="http://aquelito.fr">aQuelito</a>.<br />Please see the included README or our <a href="http://aquelito.fr">support</a>. 8.3.4-dev
 version: VERSION
 
 libraries-override:
@@ -36,11 +36,12 @@ libraries-override:
   classy/base:
     css:
       component:
-        css/components/breadcrumb.css: css/component/breadcrumb.css
+        css/components/breadcrumb.css: false
+        css/components/button.css: false
         css/components/messages.css: css/component/messages.css
         css/components/progress.css: css/component/progress.css
 
-        css/components/button.css: css/component/button.css
+
         css/components/more-link.css: css/component/more-link.css
         css/components/form.css: css/component/form.css
         css/components/pager.css: css/component/pager.css

@@ -14,12 +14,12 @@
  * @ingroup themeable
  */
 #}
-<h2 class="visually-hidden">{{ 'Installation tasks'|t }}</h2>
+<h2 class="a11y">{{ 'Installation tasks'|t }}</h2>
 <ol class="task-list">
 {% for task in tasks %}
   <li{{ task.attributes }}>
     {{ task.item }}
-    {% if task.status %}<span class="visually-hidden"> ({{ task.status }})</span>{% endif %}
+    {% if task.status %}<span class="a11y"> ({{ task.status }})</span>{% endif %}
   </li>
 {% endfor %}
 </ol>

@@ -10,8 +10,12 @@
  * @see template_preprocess_input()
  */
 #}
-<button{{ attributes }}>
-  <svg class="icon search-box__open">
-    <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/themes/custom/mytheme/build/img/svg-sprite.svg#icon-search"></use>
-  </svg>
+<button {{ attributes }}>
+  {% if element['#icon-left'] %}
+    <span class="i i-{{ element['#icon-left'] }}" aria-hidden="true"></span>
+  {% endif %}
+  {{ attributes.value }}
+  {% if element['#icon-right'] %}
+    <span class="i i-{{ element['#icon-right'] }}" aria-hidden="true"></span>
+  {% endif %}
 </button>

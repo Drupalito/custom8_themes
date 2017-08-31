@@ -25,14 +25,21 @@
  * @see template_preprocess_block()
  */
 #}
+{% set divContainer = create_attribute() %}
 {%
-  set classes = [
-    'breadcrumb',
+  set classesContainer = [
     'col-xs-12',
   ]
 %}
-<div{{ attributes.setAttribute('id', 'breadcrumb').addClass(classes) }}>
-  {% block content %}
-    {{ content }}
-  {% endblock %}
+{%
+  set classes = [
+    'breadcrumb',
+  ]
+%}
+<div{{ divContainer.removeAttribute('id').addClass(classesContainer) }}>
+  <div{{ attributes.setAttribute('id', 'breadcrumb').addClass(classes) }}>
+    {% block content %}
+      {{ content }}
+    {% endblock %}
+  </div>
 </div>

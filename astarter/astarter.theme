@@ -7,6 +7,7 @@
 
 define('THEME_PATH', base_path() . drupal_get_path('theme', 'astarter'));
 
+use Drupal\Core\Render\Element;
 use Drupal\Component\Utility\Html;
 use Drupal\Component\Utility\SafeMarkup;
 use Drupal\Component\Utility\Xss;
@@ -124,19 +125,19 @@ function astarter_preprocess_field(&$variables) {
   // Creating variables for the template.
   $variables['bundle_type'] = $element['#bundle'];
 
-  if ($field_type == 'entity_reference') {
-    foreach($variables['items'] AS $k => $field) {
-      if ($field['content']['#options']['entity_type'] == 'taxonomy_term') {
-        // add a class to the <a>.
-        $variables['items'][$k]['content']['#options']['attributes']['class'] = array('taxonomy-term');
-        // add a class to the field item wrapper.
-        $variables['items'][$k]['attributes']->addClass('field-item--taxonomy-term');
-        // add a class to the outer field wrapper.
-        $variables['attributes']['class'][] = 'field--taxonomy-terms';
-        $variables['attributes']['class'][] = 'clearfix';
-      }
-    }
-  }
+  // if ($field_type == 'entity_reference') {
+  //   foreach($variables['items'] AS $k => $field) {
+  //     if ($field['content']['#options']['entity_type'] == 'taxonomy_term') {
+  //       // add a class to the <a>.
+  //       $variables['items'][$k]['content']['#options']['attributes']['class'] = array('taxonomy-term');
+  //       // add a class to the field item wrapper.
+  //       $variables['items'][$k]['attributes']->addClass('field-item--taxonomy-term');
+  //       // add a class to the outer field wrapper.
+  //       $variables['attributes']['class'][] = 'field--taxonomy-terms';
+  //       $variables['attributes']['class'][] = 'clearfix';
+  //     }
+  //   }
+  // }
 }
 
 /**
@@ -192,15 +193,49 @@ function astarter_page_attachments_alter(array &$attachments) {
   }
 }
 
+function astarter_theme_suggestions_alter(array &$suggestions, array $variables, $hook) {
+  if ($hook == 'form' && !empty($variables['element']['#id'])) {
+    array_splice($suggestions, count($suggestions) + 1, 0, 'form__' . $variables['element']['#id']);
+  }
+}
+
 /**
- * Implements hook_form_alter().
+ * Implements hook_theme_suggestions_HOOK_alter()
+ * @param array $suggestions
+ * @param array $variables
  */
-function astarter_form_search_block_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state) {
+function astarter_theme_suggestions_form_element_alter(array &$suggestions, array $variables) {
+  array_splice($suggestions, count($suggestions) + 1, 0, 'form_element__' . $variables['element']['#type']);
+  array_splice($suggestions, count($suggestions) + 1, 0, 'form_element__' . $variables['element']['#type'] . '__' . $variables['element']['#name']);
+}
 
-  $form['keys']['#attributes']['class'][] = 'search__input';
-  $form['keys']['#attributes']['placeholder'] = t('Search');
-  $form['keys']['#attributes']['title'] = t('Enter your keywords…');
+/**
+ * Implements hook_theme_suggestions_HOOK_alter()
+ * @param array $suggestions
+ * @param array $variables
+ */
+function astarter_theme_suggestions_select_alter(array &$suggestions, array $variables) {
+  array_splice($suggestions, 1, 0, 'select__' . $variables['element']['#name']);
+}
 
+/**
+ * Implements hook_theme_suggestions_HOOK_alter()
+ * @param array $suggestions
+ * @param array $variables
+ */
+function astarter_theme_suggestions_textarea_alter(array &$suggestions, array $variables) {
+  array_splice($suggestions, 1, 0, 'textarea__' . $variables['element']['#name']);
+}
+
+/**
+ * Implements hook_theme_suggestions_HOOK_alter()
+ * @param array $suggestions
+ * @param array $variables
+ */
+function astarter_theme_suggestions_fieldset_alter(array &$suggestions, array $variables) {
+  // array_splice($suggestions, 1, 0, 'fieldset__' . $variab;les['element']['#name']);
+  // array_splice($suggestions, count($suggestions) + 1, 0, 'fieldset__' . $variables['element']['#type']);
+  // array_splice($suggestions, count($suggestions) + 1, 0, 'fieldset__' . $variables['element']['#type'] . '__' . $variables['element']['#name']);
 }
 
 /**
@@ -210,10 +245,20 @@ function astarter_form_search_block_form_alter(&$form, \Drupal\Core\Form\FormSta
 function astarter_theme_suggestions_input_alter(&$suggestions, array $variables) {
   $element = $variables['element'];
 
-  if (isset($element['#attributes']['data-twig-suggestion'])) {
-    // $suggestions[] = 'input__' . $element['#type'] . '__' . $element['#attributes']['data-twig-suggestion'];
-    $suggestions[] = 'input__' . $element['#attributes']['data-twig-suggestion'];
+  if (isset($variables['element']['#icon']) || isset($variables['element']['#icon-left']) || isset($variables['element']['#icon-right'])) {
+    $suggestions[] = 'input__button_icon';
+    if (isset($variables['element']['#icon'])) {
+      $suggestions[] = 'input__submit_icon_' . $variables['element']['#icon'];
+    }
   }
+
+  // if (isset($element['#attributes']['data-twig-suggestion'])) {
+    // $suggestions[] = 'input__' . $element['#type'] . '__' . $element['#attributes']['data-twig-suggestion'];
+    // $suggestions[] = 'input__button';
+    // $suggestions[] = 'form__element__type__search';
+    // $suggestions[] = 'input__' . $element['#attributes']['data-twig-suggestion'];
+  // }
+
 }
 
 /**
@@ -223,9 +268,17 @@ function astarter_theme_suggestions_input_alter(&$suggestions, array $variables)
  */
 function astarter_form_alter(&$form, FormStateInterface $form_state, $form_id) {
   $form['actions']['submit']['#attributes']['class'][] = 'btn';
-  $form['actions']['submit']['#attributes']['data-twig-suggestion'] = 'input--button';
 
   if ($form['#id'] == 'views-exposed-form-search-results') {
     $form['actions']['submit']['#attributes']['class'][] = 'search-box__btn';
+  }
+
+  if ($form_id == 'search_block_form') {
+    $form['keys']['#attributes']['class'][] = 'search__input';
+    $form['keys']['#attributes']['placeholder'] = t('Search');
+    $form['keys']['#attributes']['title'] = t('Enter your keywords…');
+    // $form['keys']['#attributes']['data-twig-suggestion'] = 'form-element--type--search';
+
+    // $form['actions']['submit']['#attributes']['class'][] = '';
   }
 }
