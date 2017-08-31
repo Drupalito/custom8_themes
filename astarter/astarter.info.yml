@@ -1,13 +1,83 @@
 
+core: 8.x
 name: astarter
 type: theme
 base theme: classy
 description: Theme created by <a href="http://aquelito.fr">aQuelito</a>.<br />Please see the included README or our <a href="http://aquelito.fr">support</a>.
-core: 8.x
+version: VERSION
+
+libraries-override:
+  core/normalize: astarter/base
+  system/base:
+    css:
+      component:
+        /core/themes/stable/css/system/components/sticky-header.module.css: css/stable/base.sticky-header.css
+        /core/themes/stable/css/system/components/ajax-progress.module.css: css/stable/base.ajax-progress.css
+        /core/themes/stable/css/system/components/autocomplete-loading.module.css: css/stable/base.autocomplete-loading.css
+        /core/themes/stable/css/system/components/align.module.css: css/base.align.css
+        /core/themes/stable/css/system/components/clearfix.module.css: css/base.clearfix.css
+        /core/themes/stable/css/system/components/fieldgroup.module.css: css/stable/base.fieldgroup.css
+        /core/themes/stable/css/system/components/container-inline.module.css: css/stable/base.container-inline.css
+        /core/themes/stable/css/system/components/hidden.module.css: css/stable/base.hidden.css
+        /core/themes/stable/css/system/components/details.module.css: css/stable/base.details.css
+        /core/themes/stable/css/system/components/item-list.module.css: css/stable/base.item-list.css
+        /core/themes/stable/css/system/components/js.module.css: css/stable/base.js.css
+        /core/themes/stable/css/system/components/nowrap.module.css: css/stable/base.nowrap.css
+        /core/themes/stable/css/system/components/position-container.module.css: css/stable/base.position-container.css
+        /core/themes/stable/css/system/components/progress.module.css: css/stable/base.progress.css
+        /core/themes/stable/css/system/components/reset-appearance.module.css: css/stable/base.reset-appearance.css
+        /core/themes/stable/css/system/components/resize.module.css: css/stable/base.resize.css
+        # /core/themes/stable/css/components/system-status-counter.css: false
+        # /core/themes/stable/css/components/system-status-report-counters.css: false
+        # /core/themes/stable/css/components/system-status-report-general-info.css: false
+        /core/themes/stable/css/system/components/tabledrag.module.css: css/stable/base.tabledrag.css
+        /core/themes/stable/css/system/components/tablesort.module.css: css/stable/base.tablesort.css
+        /core/themes/stable/css/system/components/tree-child.module.css: css/stable/base.tree-child.css
+  classy/base:
+    css:
+      component:
+        css/components/breadcrumb.css: css/component/breadcrumb.css
+        css/components/messages.css: css/component/messages.css
+        css/components/progress.css: css/component/progress.css
+
+        css/components/button.css: css/component/button.css
+        css/components/more-link.css: css/component/more-link.css
+        css/components/form.css: css/component/form.css
+        css/components/pager.css: css/component/pager.css
+        css/components/tabs.css: css/component/tabs.css
+        css/components/action-links.css: css/component/action-links.css
+        css/components/details.css: css/component/details.css
+        css/components/field.css: css/component/field.css
+        css/components/links.css: css/component/links.css
+        css/components/link.css: css/component/link.css
+        css/components/tabledrag.css: css/component/tabledrag.css
+        css/components/tableselect.css: css/component/tableselect.css
+        css/components/tablesort.css: css/component/tablesort.css
+        css/components/textarea.css: css/component/textarea.css
+        css/components/collapse-processed.css: css/component/collapse-processed.css
+        css/components/container-inline.css: css/component/container-inline.css
+        css/components/exposed-filters.css: css/component/exposed-filters.css
+        css/components/icons.css: css/component/icons.css
+        css/components/inline-form.css: css/component/inline-form.css
+        css/components/item-list.css: css/component/item-list.css
+        css/components/menu.css: css/component/menu.css
+        css/components/ui-dialog.css: css/component/ui-dialog.css
+# The "libraries:" section will add a library to _all_ pages.
+libraries:
+  - astarter/base
+  - astarter/base.messages
+
+  - astarter/base.print
+  - astarter/theme.logo
+  - astarter/theme.banner.darken
+  - astarter/theme.navigation
+  - astarter/theme.sidebar
+  - astarter/theme.contentinfo
+  - astarter/theme.content
 
 regions:
   header: 'Banner (Header)'
-  branding: 'Branding (Header)'
+  branding: 'Branding'
   help: Help
   highlighted: Highlighted
   navigation: 'Primary Navigation (Nav)'
@@ -18,66 +88,3 @@ regions:
   footer: 'Contentinfo (Footer)'
   page_top: 'Page Top'
   page_bottom: 'Page Bottom'
-
-# This section controls the libraries for your theme. For full documentation,
-# see https://www.drupal.org/node/2216195
-
-# The "libraries-override:" section will allow you to:
-# - Replace an entire library.
-# - Remove an entire library.
-# - Replace an asset in a library with another asset.
-# - Remove an asset from a library.
-libraries-override:
-  core/normalize: false
-  system/base:
-    css:
-      component:
-        css/components/clearfix.module.css: false
-        css/components/container-inline.module.css: false
-
-  classy/base:
-    css:
-      component:
-        css/components/breadcrumb.css: false
-        css/components/button.css: false
-        css/components/more-link.css: false
-        css/components/pager.css: false
-        css/components/tabs.css: false
-
-# The "libraries-extend:" section will allow you to add your own JS or CSS to
-# existing libraries.
-# libraries-extend:
-
-# The "libraries:" section will add a library to _all_ pages.
-libraries:
-  - astarter/base
-  # @TODO Remove these libraries and use attach_library() for all component styles.
-  - astarter/box
-  - astarter/comment
-  - astarter/header
-  - astarter/hidden
-  - astarter/inline-links
-  - astarter/inline-sibling
-  - astarter/print-none
-  - astarter/responsive-video
-  - astarter/wireframe
-  - astarter/autocomplete
-  - astarter/collapsible-fieldset
-  - astarter/form-item
-  - astarter/form-table
-  - astarter/progress-bar
-  - astarter/progress-throbber
-  - astarter/resizable-textarea
-  - astarter/table-drag
-  - astarter/nav-menu
-  - astarter/navbar
-  - astarter/pager
-
-
-# This section is used by the contrib module, Component Libraries. It allows you
-# to reference .twig files in your sass/ directory by using the Twig namespace:
-# @astarter
-component-libraries:
-  astarter:
-    paths:
-      - css

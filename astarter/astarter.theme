@@ -102,14 +102,14 @@ function astarter_preprocess_links(&$variables) {
     $variables['links']['node-readmore']['link']['#options']['attributes']['rel'] = 'bookmark';
   }
 
-  // Clean link 'add comment'.
-  if (isset($variables['links']['comment-add'])) {
-    $variables['links']['comment-add']['link']['#options']['attributes']['class'][] = 'node__link--comment';
-    $variables['links']['comment-add']['link']['#options']['attributes']['class'][] = 'node__link--comment-add';
-    $variables['links']['comment-add']['link']['#options']['attributes']['class'][] = 'scroll';
-    // $variables['links']['comment-add']['link']['#options']['fragment'] = 'commentsAdd';
-    // $variables['links']['comment-add']['link']['#options']['attributes']['title'] = $variables['links']['comment-add']['link']['#title'];
-  }
+  // // Clean link 'add comment'.
+  // if (isset($variables['links']['comment-add'])) {
+  //   $variables['links']['comment-add']['link']['#options']['attributes']['class'][] = 'node__link--comment';
+  //   $variables['links']['comment-add']['link']['#options']['attributes']['class'][] = 'node__link--comment-add';
+  //   $variables['links']['comment-add']['link']['#options']['attributes']['class'][] = 'scroll';
+  //   // $variables['links']['comment-add']['link']['#options']['fragment'] = 'commentsAdd';
+  //   // $variables['links']['comment-add']['link']['#options']['attributes']['title'] = $variables['links']['comment-add']['link']['#title'];
+  // }
 }
 
 /**
@@ -195,11 +195,37 @@ function astarter_page_attachments_alter(array &$attachments) {
 /**
  * Implements hook_form_alter().
  */
-function subtheme_child_form_search_block_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state) {
+function astarter_form_search_block_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state) {
 
-  // $form['#attributes']['role'][] = 'search';
-  // $form['keys']['#attributes']['class'][] = 'search__input';
+  $form['keys']['#attributes']['class'][] = 'search__input';
   $form['keys']['#attributes']['placeholder'] = t('Search');
   $form['keys']['#attributes']['title'] = t('Enter your keywords…');
 
+}
+
+/**
+ * @param $suggestions
+ * @param array $variables
+ */
+function astarter_theme_suggestions_input_alter(&$suggestions, array $variables) {
+  $element = $variables['element'];
+
+  if (isset($element['#attributes']['data-twig-suggestion'])) {
+    // $suggestions[] = 'input__' . $element['#type'] . '__' . $element['#attributes']['data-twig-suggestion'];
+    $suggestions[] = 'input__' . $element['#attributes']['data-twig-suggestion'];
+  }
+}
+
+/**
+ * @param $form
+ * @param \Drupal\Core\Form\FormStateInterface $form_state
+ * @param $form_id
+ */
+function astarter_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+  $form['actions']['submit']['#attributes']['class'][] = 'btn';
+  $form['actions']['submit']['#attributes']['data-twig-suggestion'] = 'input--button';
+
+  if ($form['#id'] == 'views-exposed-form-search-results') {
+    $form['actions']['submit']['#attributes']['class'][] = 'search-box__btn';
+  }
 }

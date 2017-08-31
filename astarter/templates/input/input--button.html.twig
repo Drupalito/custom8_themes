@@ -1,0 +1,17 @@
+{#
+/**
+ * @file
+ * Theme override for an 'input' #type form element.
+ *
+ * Available variables:
+ * - attributes: A list of HTML attributes for the input element.
+ * - children: Optional additional rendered elements.
+ *
+ * @see template_preprocess_input()
+ */
+#}
+<button{{ attributes }}>
+  <svg class="icon search-box__open">
+    <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/themes/custom/mytheme/build/img/svg-sprite.svg#icon-search"></use>
+  </svg>
+</button>

@@ -1,7 +1,7 @@
 {#
 /**
  * @file
- * Default theme implementation to display a status icon for a forum post.
+ * Theme override to display a status icon for a forum post.
  *
  * Available variables:
  * - attributes: HTML attributes to be applied to the wrapper element.
@@ -14,10 +14,17 @@
  * - icon_status: Indicates which status icon should be used.
  *
  * @see template_preprocess_forum_icon()
- *
- * @ingroup themeable
  */
 #}
-<div{{ attributes }}>
-  {{ icon_title }}
+{%
+  set classes = [
+    'forum__icon',
+    'forum__topic-status--' ~ icon_status,
+  ]
+%}
+<div{{ attributes.addClass(classes) }}>
+  {% if first_new -%}
+    <a id="new"></a>
+  {%- endif %}
+  <span class="visually-hidden">{{ icon_title }}</span>
 </div>

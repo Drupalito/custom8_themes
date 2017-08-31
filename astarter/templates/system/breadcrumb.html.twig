@@ -10,8 +10,9 @@
  */
 #}
 {% if breadcrumb %}
+<div class="breadcrumb" role="navigation" aria-labelledby="{{ 'Breadcrumb'|t }}">
   <p class="mvn">
-    <span>{{ 'You are here&nbsp;:'|t }}</span>
+    <span class="a11y">{{ 'You are here&nbsp;:'|t }}</span>
     {% for item in breadcrumb %}
       <span {{ item.attributes }}>
         {% if item.url %}
@@ -22,4 +23,5 @@
       </span>
     {% endfor %}
   </p>
+</div>
 {% endif %}

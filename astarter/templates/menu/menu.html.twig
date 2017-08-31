@@ -42,14 +42,11 @@
           item.is_collapsed ? 'menu__item--collapsed',
           item.in_active_trail ? 'menu__item--active-trail',
         ]
-      %}
-      <li{{ item.attributes.addClass(classes) }}>
+      %}<li{{ item.attributes.addClass(classes) }}>
         {{ link(item.title, item.url) }}
         {% if item.below %}
           {{ menus.menu_links(item.below, attributes, menu_level + 1) }}
         {% endif %}
-      </li>
-    {% endfor %}
-    </ul>
+      </li>{% endfor %}</ul>
   {% endif %}
 {% endmacro %}

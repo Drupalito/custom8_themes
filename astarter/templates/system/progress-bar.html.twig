@@ -9,10 +9,9 @@
  * - label: The label of the working task.
  * - percent: The percentage of the progress.
  * - message: A string containing information to be displayed.
- *
- * @ingroup themeable
  */
 #}
+{{ attach_library('astarter/progress') }}
 <div id="progress" class="progress" data-drupal-progress>
   {% if label %}
     <div class="progress__label">{{ label }}</div>

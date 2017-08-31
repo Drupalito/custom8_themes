@@ -22,7 +22,7 @@
 {{ attach_library('webform/webform.progress.bar') }}
 
 {% if progress|length < max_pages %}
-<div class="webform-progressbar clearfix">
+<div class="webform-progressbar clearfix" data-steps="{{ progress|length }}">
   <ul class="list-none mvn" data-steps="{{ progress|length }}">
     {% for index, title in progress %}{%
       set classes = [

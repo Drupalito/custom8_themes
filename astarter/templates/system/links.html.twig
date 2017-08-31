@@ -45,8 +45,7 @@
   {%- else -%}
   <ul{{ attributes }}>
   {%- endif -%}
-    {%- for key, item in links -%}
-      <li{{ item.attributes.addClass(key|clean_class) }}>
+    {%- for key, item in links -%}<li{{ item.attributes.addClass(key|clean_class) }}>
         {%- if item.link -%}
           {{ item.link }}
         {%- elseif item.text_attributes -%}
@@ -54,7 +53,5 @@
         {%- else -%}
           {{ item.text }}
         {%- endif -%}
-      </li>
-    {%- endfor -%}
-  </ul>
+      </li>{%- endfor -%}</ul>
 {%- endif %}

@@ -18,7 +18,7 @@
   {{ progress }}
 {% endif %}
 
-<div class="webform-confirmation text-center">
+<div{{ attributes.addClass('webform-confirmation text-center') }}>
   <div class="webform-confirmation__inner inner">
     {% if message %}
       {{ message }}
@@ -27,7 +27,9 @@
     {% endif %}
   </div>
 
-  <div class="webform-confirmation__back links mtm">
-    <a class="btn btn--primary" href="{{ back_url }}"><span class="i i-arrow-left2" aria-hidden="true"></span> {{ 'Back to form'|t }}</a>
-  </div>
+  {% if back %}
+    <div class="webform-confirmation__back links mtm">
+      <a class="btn btn--primary" href="{{ back_url }}"{{ back_attributes }}><span class="i i-arrow-left2" aria-hidden="true"></span> {{ back_label }}</a>
+    </div>
+  {% endif %}
 </div>

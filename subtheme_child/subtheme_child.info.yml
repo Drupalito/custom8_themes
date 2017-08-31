@@ -4,13 +4,10 @@ type: theme
 base theme: astarter
 description: subtheme_child's sub theme for astarter created by <a href="OWNER_WEBSITE">OWNER_NAME</a>.<br />Please see the included README or our <a href="OWNER_WEBSITE">support</a>. (CURRENT_YEAR).
 core: 8.x
-libraries-override:
-  classy/base: false
-libraries:
-  - astarter/global-styling
 regions:
+  preheader: 'Previous Banner'
   header: 'Banner (Header)'
-  branding: 'Branding (Header)'
+  branding: 'Branding'
   help: Help
   highlighted: Highlighted
   navigation: 'Primary Navigation (Nav)'

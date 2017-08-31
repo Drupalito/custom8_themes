@@ -5,11 +5,24 @@
  *
  * Displays status, error, and warning messages, grouped by type.
  *
- * @see template_preprocess_status_messages()
+ * An invisible heading identifies the messages for assistive technology.
+ * Sighted users see a colored box. See http://www.w3.org/TR/WCAG-TECHS/H69.html
+ * for info.
  *
- * @ingroup templates
+ * Add an ARIA label to the contentinfo area so that assistive technology
+ * user agents will better describe this landmark.
+ *
+ * Available variables:
+ * - message_list: List of messages to be displayed, grouped by type.
+ * - status_headings: List of all status types.
+ * - display: (optional) May have a value of 'status' or 'error' when only
+ *   displaying messages of that specific type.
+ * - attributes: HTML attributes for the element, including:
+ *   - class: HTML classes.
  */
 #}
+{{ attach_library('astarter/messages') }}
+{% block messages %}
 {%
   set status_heading = {
     'status': 'Status message'|t,
@@ -34,9 +47,12 @@
     'messages--' ~ status_classes[type],
   ]
 %}
-<div{{ attributes.addClass(classes) }}>
+<div role="contentinfo" aria-label="{{ status_headings[type] }}"{{ attributes.addClass(classes)|without('role', 'aria-label') }}>
+  {% if type == 'error' %}
+    <div role="alert">
+  {% endif %}
   {% if status_headings[type] %}
-    <p class="messages__title element-invisible">{{ status_headings[type] }}</p>
+    <p class="messages__title a11y">{{ status_headings[type] }}</p>
   {% endif %}
   <div class="messages__content">
     {% if messages|length > 1 %}
@@ -49,5 +65,11 @@
       <p class="messages__description">{{ messages|first }}</p>
     {% endif %}
   </div>
+  {% if type == 'error' %}
+    </div>
+  {% endif %}
 </div>
+  {# Remove type specific classes. #}
+  {% set attributes = attributes.removeClass(classes) %}
 {% endfor %}
+{% endblock messages %}

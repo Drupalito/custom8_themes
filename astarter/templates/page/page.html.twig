@@ -57,10 +57,11 @@
         {# Content columns #}
         {%
           set content_classes = [
-            page.sidebar_first and page.sidebar_second ? 'col-xs-12 col-sm-4',
-            page.sidebar_first and page.sidebar_second is empty ? 'col-xs-12 col-sm-8',
-            page.sidebar_second and page.sidebar_first is empty ? 'col-xs-12 col-sm-8',
-            page.sidebar_first is empty and page.sidebar_second is empty ? 'col-xs-12'
+            is_front ? 'col-xs-12',
+            is_front is empty and page.sidebar_first and page.sidebar_second ? 'col-xs-12 col-sm-4',
+            is_front is empty and page.sidebar_first and page.sidebar_second is empty ? 'col-xs-12 col-sm-8',
+            is_front is empty and page.sidebar_second and page.sidebar_first is empty ? 'col-xs-12 col-sm-8',
+            is_front is empty and page.sidebar_first is empty and page.sidebar_second is empty ? 'col-xs-12'
           ]
         %}
         <div{{ content_attributes.addClass(content_classes) }}>
