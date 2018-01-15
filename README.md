@@ -1,3 +1,4 @@
+
 # Theme
 
 Nécessite l'activation des modules custom
@@ -6,5 +7,3 @@ Nécessite l'activation des modules custom
 * search_form
 
 Développement d'un nouveau thème
-
-
